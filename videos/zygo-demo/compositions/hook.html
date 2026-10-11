@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin-ext.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C4, U+2113;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        [data-composition-id="hook"] {
+          font-family: "Archivo", sans-serif;
+          color: #ffffff;
+        }
+        [data-composition-id="hook"] .hk-bg {
+          position: absolute;
+          inset: 0;
+          background-color: #0a5cf5;
+          background-image:
+            linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.07) 2px, transparent 2px);
+          background-size: 96px 96px;
+          background-position: -2px -2px;
+        }
+        [data-composition-id="hook"] .hk-glow {
+          position: absolute;
+          width: 1500px;
+          height: 1500px;
+          left: 700px;
+          top: -300px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(140, 185, 255, 0.55) 0%, rgba(140, 185, 255, 0) 60%);
+        }
+        [data-composition-id="hook"] .hk-glow2 {
+          position: absolute;
+          width: 1200px;
+          height: 1200px;
+          left: -500px;
+          top: 400px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(4, 20, 60, 0.45) 0%, rgba(4, 20, 60, 0) 62%);
+        }
+        [data-composition-id="hook"] .hk-brand {
+          position: absolute;
+          left: 110px;
+          top: 64px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          font-size: 32px;
+          font-weight: 800;
+        }
+        [data-composition-id="hook"] .hk-brand-mark {
+          display: block;
+          width: 58px;
+          height: 58px;
+          border-radius: 14px;
+          background: url("assets/brand/zygo-logo.jpg") center / cover no-repeat;
+        }
+        [data-composition-id="hook"] .hk-live {
+          position: absolute;
+          left: 110px;
+          top: 150px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 10px 20px;
+          border: 2px solid rgba(255, 255, 255, 0.6);
+          border-radius: 999px;
+          font-size: 18px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+        }
+        [data-composition-id="hook"] .hk-rec {
+          display: block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #ffffff;
+        }
+        [data-composition-id="hook"] .hk-beat {
+          position: absolute;
+          left: 110px;
+          top: 300px;
+          width: 1090px;
+        }
+        [data-composition-id="hook"] .hk-k {
+          display: block;
+          font-size: 24px;
+          font-weight: 700;
+          letter-spacing: 0.24em;
+          color: rgba(255, 255, 255, 0.78);
+          margin-bottom: 18px;
+        }
+        [data-composition-id="hook"] .hk-wl {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 8px;
+        }
+        [data-composition-id="hook"] .hk-w {
+          display: block;
+          font-size: 124px;
+          font-weight: 800;
+          letter-spacing: -0.04em;
+          line-height: 1.0;
+          white-space: nowrap;
+        }
+        [data-composition-id="hook"] .hk-pill {
+          display: inline-block;
+          padding: 0 26px 6px 26px;
+          border-radius: 26px;
+          background: #ffffff;
+          color: #0a5cf5;
+        }
+        [data-composition-id="hook"] .hk-navy {
+          color: #04143c;
+        }
+        [data-composition-id="hook"] .hk-asset {
+          position: absolute;
+          left: 110px;
+          top: 650px;
+          width: 1000px;
+          height: 300px;
+        }
+        [data-composition-id="hook"] .hk-coin {
+          position: absolute;
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 76px;
+          font-weight: 800;
+          box-shadow: 0 18px 40px rgba(4, 20, 60, 0.35);
+        }
+        [data-composition-id="hook"] .hk-usdc {
+          background: #ffffff;
+          color: #0a5cf5;
+          border: 8px solid #cfe0ff;
+        }
+        [data-composition-id="hook"] .hk-inr {
+          background: #04143c;
+          color: #ffffff;
+          border: 8px solid #6fa0ff;
+        }
+        [data-composition-id="hook"] .hk-small {
+          position: absolute;
+          font-size: 30px;
+          font-weight: 700;
+          white-space: nowrap;
+        }
+        [data-composition-id="hook"] .hk-ico {
+          position: absolute;
+          width: 150px;
+          height: 150px;
+          border-radius: 32px;
+          background: #ffffff;
+          box-shadow: 0 18px 40px rgba(4, 20, 60, 0.35);
+        }
+        [data-composition-id="hook"] .hk-ico svg {
+          display: block;
+          width: 150px;
+          height: 150px;
+        }
+        [data-composition-id="hook"] .hk-laser {
+          position: absolute;
+          left: -10px;
+          top: 20px;
+          width: 170px;
+          height: 6px;
+          background: #04143c;
+          box-shadow: 0 0 16px 4px rgba(4, 20, 60, 0.4);
+        }
+        [data-composition-id="hook"] .hk-track {
+          position: absolute;
+          left: 170px;
+          top: 72px;
+          width: 420px;
+          height: 6px;
+          background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.85) 50%, transparent 50%);
+          background-size: 24px 6px;
+          transform-origin: 0 50%;
+        }
+        [data-composition-id="hook"] .hk-mini {
+          position: absolute;
+          width: 96px;
+          height: 96px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 50px;
+          font-weight: 800;
+          background: #04143c;
+          color: #ffffff;
+          border: 6px solid #6fa0ff;
+        }
+        [data-composition-id="hook"] .hk-seal {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 170px;
+          height: 170px;
+        }
+        [data-composition-id="hook"] .hk-chip {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 16px 30px;
+          border-radius: 999px;
+          background: #04143c;
+          font-size: 32px;
+          font-weight: 800;
+          white-space: nowrap;
+        }
+        [data-composition-id="hook"] .hk-dev {
+          position: absolute;
+          left: 1230px;
+          top: 66px;
+          width: 540px;
+          height: 940px;
+          border-radius: 34px;
+          overflow: hidden;
+          background: #ffffff;
+          box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.25), 0 40px 90px rgba(4, 20, 60, 0.45);
+        }
+        [data-composition-id="hook"] .hk-cam {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 540px;
+          height: 940px;
+          transform-origin: 0 0;
+        }
+        [data-composition-id="hook"] .hk-vid {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        [data-composition-id="hook"] .hk-tagwrap {
+          position: absolute;
+          left: 1230px;
+          top: 40px;
+          width: 540px;
+          height: 52px;
+        }
+        [data-composition-id="hook"] .hk-tag {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 540px;
+          display: flex;
+          justify-content: center;
+        }
+        [data-composition-id="hook"] .hk-tag span {
+          display: block;
+          padding: 12px 24px;
+          border-radius: 999px;
+          font-size: 18px;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          white-space: nowrap;
+          box-shadow: 0 10px 24px rgba(4, 20, 60, 0.3);
+        }
+        [data-composition-id="hook"] .hk-tag-u span {
+          background: #ffffff;
+          color: #0a5cf5;
+        }
+        [data-composition-id="hook"] .hk-tag-l span {
+          background: #04143c;
+          color: #ffffff;
+        }
+        [data-composition-id="hook"] .hk-end {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        [data-composition-id="hook"] .hk-endlock {
+          display: flex;
+          align-items: center;
+          gap: 34px;
+        }
+        [data-composition-id="hook"] .hk-endlogo {
+          display: block;
+          width: 190px;
+          height: 190px;
+          border-radius: 44px;
+          box-shadow: 0 30px 70px rgba(4, 20, 60, 0.45);
+        }
+        [data-composition-id="hook"] .hk-endword {
+          font-size: 120px;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+        }
+        [data-composition-id="hook"] .hk-endtag {
+          display: flex;
+          gap: 30px;
+          margin-top: 50px;
+          font-size: 76px;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+        }
+        [data-composition-id="hook"] .hk-endtag span {
+          display: block;
+        }
+      </style>
+
+      <div id="root" data-composition-id="hook" data-width="1920" data-height="1080">
+        <div class="hk-bg"></div>
+        <div class="hk-glow" id="hk-glow"></div>
+        <div class="hk-glow2"></div>
+
+        <div id="hk-main">
+          <div class="hk-brand" id="hk-brand"><span class="hk-brand-mark"></span>zygo.cash</div>
+          <div class="hk-live" id="hk-live"><span class="hk-rec" id="hk-rec"></span>REAL APP · LIVE PAYMENT</div>
+
+          <!-- beat 1 -->
+          <div class="hk-beat" id="hk-b1">
+            <span class="hk-k">01 · SCAN</span>
+            <span class="hk-wl"><span class="hk-w" id="hk-w1">Scan any QR.</span></span>
+          </div>
+          <div class="hk-asset" id="hk-a1">
+            <div class="hk-ico" style="left: 0; top: 40px">
+              <svg viewBox="0 0 150 150">
+                <g fill="#0a5cf5">
+                  <path d="M25 25h40v40H25zM33 33v24h24V33zM39 39h12v12H39z" fill-rule="evenodd" />
+                  <path d="M85 25h40v40H85zM93 33v24h24V33zM99 39h12v12H99z" fill-rule="evenodd" />
+                  <path d="M25 85h40v40H25zM33 93v24h24V93zM39 99h12v12H39z" fill-rule="evenodd" />
+                  <path d="M85 85h12v12H85zM103 85h22v10h-22zM85 103h10v22H85zM101 101h12v12h-12zM115 113h10v12h-10z" />
+                </g>
+              </svg>
+              <div class="hk-laser" id="hk-laser"></div>
+            </div>
+            <span class="hk-small" style="left: 190px; top: 76px">Any merchant's existing UPI QR</span>
+          </div>
+
+          <!-- beat 2 -->
+          <div class="hk-beat" id="hk-b2">
+            <span class="hk-k">02 · PAY</span>
+            <span class="hk-wl"><span class="hk-w" id="hk-w2">Pay with <span class="hk-pill">USDC</span></span></span>
+          </div>
+          <div class="hk-asset" id="hk-a2">
+            <div class="hk-coin hk-inr" id="hk-c-inr" style="left: 0; top: 40px">₹</div>
+            <svg style="position: absolute; left: 180px; top: 95px; width: 120px; height: 40px" viewBox="0 0 120 40" fill="none" stroke="#ffffff" stroke-width="6"><path d="M4 20h104M90 6l16 14-16 14" /></svg>
+            <div class="hk-coin hk-usdc" id="hk-c-usdc" style="left: 320px; top: 40px">$</div>
+            <span class="hk-small" style="left: 510px; top: 70px">₹10.00 = 0.0960 USDC</span>
+            <span class="hk-small" style="left: 510px; top: 116px; font-size: 24px; font-weight: 500; opacity: 0.85">Full cost upfront. No hidden spread.</span>
+          </div>
+
+          <!-- beat 3 -->
+          <div class="hk-beat" id="hk-b3">
+            <span class="hk-k">03 · MERCHANT PAID</span>
+            <span class="hk-wl"><span class="hk-w" id="hk-w3">Paid in <span class="hk-navy">₹</span> via UPI.</span></span>
+          </div>
+          <div class="hk-asset" id="hk-a3">
+            <div class="hk-ico" style="left: 0; top: 40px">
+              <svg viewBox="0 0 150 150" fill="none" stroke="#04143c" stroke-width="7">
+                <path d="M30 62L75 36l45 26z" />
+                <path d="M40 66v40M60 66v40M90 66v40M110 66v40M28 112h94" />
+              </svg>
+            </div>
+            <div class="hk-track" id="hk-track"></div>
+            <div class="hk-mini" id="hk-mini" style="left: 160px; top: 67px">₹</div>
+            <div class="hk-ico" style="left: 600px; top: 40px">
+              <svg viewBox="0 0 150 150" fill="none" stroke="#04143c" stroke-width="7">
+                <path d="M30 60l10-24h70l10 24" />
+                <path d="M30 60h90v6a15 15 0 0 1-30 0 15 15 0 0 1-30 0 15 15 0 0 1-30 0z" />
+                <path d="M38 80v34h74V80M64 114V92h22v22" />
+              </svg>
+            </div>
+            <span class="hk-small" style="left: 0; top: 212px; font-size: 24px">PROVIDER</span>
+            <span class="hk-small" style="left: 600px; top: 212px; font-size: 24px">GLOCAL ARENA CAFE</span>
+          </div>
+
+          <!-- beat 4 -->
+          <div class="hk-beat" id="hk-b4">
+            <span class="hk-k">04 · SETTLED</span>
+            <span class="hk-wl"><span class="hk-w" id="hk-w4">In seconds.</span></span>
+          </div>
+          <div class="hk-asset" id="hk-a4">
+            <svg class="hk-seal" id="hk-seal" viewBox="0 0 170 170">
+              <g stroke="#ffffff" stroke-width="6" stroke-linecap="round" id="hk-rays">
+                <path d="M85 6v18M85 146v18M6 85h18M146 85h18M29 29l13 13M128 128l13 13M141 29l-13 13M42 128l-13 13" />
+              </g>
+              <circle cx="85" cy="85" r="50" fill="#ffffff" />
+              <path d="M62 86l16 16 32-34" fill="none" stroke="#0a5cf5" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <div class="hk-chip" style="left: 210px; top: 52px">Settled on-chain · escrow released</div>
+          </div>
+
+          <div class="hk-tagwrap">
+            <div class="hk-tag hk-tag-u" id="hk-tag-u"><span>CUSTOMER · PAYS IN USDC</span></div>
+            <div class="hk-tag hk-tag-l" id="hk-tag-l"><span>PROVIDER · PAYS THE MERCHANT</span></div>
+          </div>
+          <div class="hk-dev" id="hk-dev">
+            <div class="hk-cam" id="hk-cam">
+              <video id="hk-v0" class="hk-vid" src="assets/footage/user.mp4" data-start="0" data-duration="1.05" data-media-start="3.4" data-track-index="2" data-hf-media-start-basis="local" muted playsinline></video>
+              <video id="hk-v1" class="hk-vid" src="assets/footage/user.mp4" data-start="1.05" data-duration="1.0" data-media-start="9.6" data-track-index="2" data-hf-media-start-basis="local" muted playsinline></video>
+              <video id="hk-v2" class="hk-vid" src="assets/footage/user.mp4" data-start="2.05" data-duration="2.1" data-media-start="17.35" data-playback-rate="0.5" data-track-index="2" data-hf-media-start-basis="local" muted playsinline></video>
+              <video id="hk-v3" class="hk-vid" src="assets/footage/lp.mp4" data-start="4.15" data-duration="2.35" data-media-start="72.6" data-track-index="2" data-hf-media-start-basis="local" muted playsinline></video>
+              <video id="hk-v4" class="hk-vid" src="assets/footage/user.mp4" data-start="6.5" data-duration="3.0" data-media-start="109.2" data-track-index="2" data-hf-media-start-basis="local" muted playsinline></video>
+            </div>
+          </div>
+        </div>
+
+        <div class="hk-end" id="hk-end">
+          <div class="hk-endlock">
+            <img class="hk-endlogo" id="hk-endlogo" src="assets/brand/zygo-logo.jpg" alt="Zygo" />
+            <span class="hk-endword" id="hk-endword">zygo.cash</span>
+          </div>
+          <div class="hk-endtag">
+            <span id="hk-t1">Earn globally.</span>
+            <span id="hk-t2" class="hk-navy">Pay locally.</span>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const W = 540, H = 940, K = W / 960;
+        function pose(s, x, y) {
+          let tx = W / 2 - s * x * K, ty = H / 2 - s * y * K;
+          tx = Math.min(0, Math.max(W - s * W, tx));
+          ty = Math.min(0, Math.max(H - s * H, ty));
+          return { scale: s, x: tx, y: ty };
+        }
+        tl.fromTo("#hk-glow", { x: 0, scale: 0.9 }, { x: -160, scale: 1.1, duration: 12, ease: "sine.inOut" }, 0);
+        tl.fromTo("#hk-brand", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+        tl.fromTo("#hk-live", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.25);
+        tl.fromTo("#hk-rec", { opacity: 1 }, { opacity: 0.25, duration: 0.5, ease: "none", repeat: 15, yoyo: true }, 0.3);
+        // device
+        tl.fromTo("#hk-dev", { y: 160, opacity: 0, rotation: 4 }, { y: 0, opacity: 1, rotation: 0, duration: 0.8, ease: "power4.out" }, 0.0);
+        tl.fromTo("#hk-tag-u", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, 0.45);
+        tl.set("#hk-tag-l", { opacity: 0 }, 0);
+        tl.to("#hk-tag-u", { opacity: 0, duration: 0.15 }, 4.1);
+        tl.fromTo("#hk-tag-l", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)", immediateRender: false }, 4.15);
+        tl.to("#hk-tag-l", { opacity: 0, duration: 0.15 }, 6.45);
+        tl.to("#hk-tag-u", { opacity: 1, duration: 0.3 }, 6.5);
+        // camera: hard cuts with a punch per beat
+        tl.set("#hk-cam", pose(1.0, 480, 835), 0);
+        tl.set("#hk-cam", pose(1.32, 480, 520), 1.05);
+        tl.set("#hk-cam", pose(1.15, 470, 560), 2.05);
+        tl.set("#hk-cam", pose(1.2, 480, 1250), 4.15);
+        tl.set("#hk-cam", pose(1.15, 480, 900), 6.5);
+        [1.05, 2.05, 4.15, 6.5].forEach((t) => {
+          tl.fromTo("#hk-dev", { scale: 1.05 }, { scale: 1, duration: 0.45, ease: "power3.out", immediateRender: false }, t);
+        });
+        // beats: word in from below, out upward
+        const beats = [[1, 0.3, 2.0], [2, 2.0, 4.1], [3, 4.15, 6.45], [4, 6.5, 8.45]];
+        beats.forEach(([n, a, b]) => {
+          tl.set(`#hk-b${n}`, { opacity: 0 }, 0);
+          tl.set(`#hk-b${n}`, { opacity: 1 }, a);
+          tl.set(`#hk-b${n}`, { opacity: 0 }, b);
+          tl.fromTo(`#hk-b${n} .hk-k`, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, a);
+          tl.fromTo(`#hk-w${n}`, { yPercent: 110 }, { yPercent: 0, duration: 0.5, ease: "power4.out" }, a);
+          tl.fromTo(`#hk-a${n}`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" }, a + 0.15);
+          tl.to(`#hk-w${n}`, { yPercent: -110, duration: 0.3, ease: "power3.in" }, b - 0.3);
+          tl.to(`#hk-b${n} .hk-k`, { opacity: 0, duration: 0.2 }, b - 0.25);
+          tl.to(`#hk-a${n}`, { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, b - 0.3);
+        });
+        // beat assets
+        tl.fromTo("#hk-laser", { y: 0 }, { y: 104, duration: 0.55, ease: "sine.inOut", repeat: 2, yoyo: true }, 0.4);
+        tl.fromTo("#hk-c-inr", { rotationY: 0 }, { rotationY: 360, duration: 0.9, ease: "power2.inOut" }, 2.3);
+        tl.fromTo("#hk-c-usdc", { scale: 0.5 }, { scale: 1, duration: 0.6, ease: "back.out(2.5)" }, 2.55);
+        tl.fromTo("#hk-track", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 4.35);
+        tl.fromTo("#hk-mini", { x: 0 }, { x: 410, duration: 1.1, ease: "power2.inOut" }, 4.7);
+        tl.fromTo("#hk-seal", { scale: 0.3, rotation: -30 }, { scale: 1, rotation: 0, duration: 0.6, ease: "back.out(2.2)" }, 6.65);
+        tl.fromTo("#hk-rays", { opacity: 0, scale: 0.6, transformOrigin: "85px 85px" }, { opacity: 1, scale: 1.1, duration: 0.5, ease: "power2.out" }, 6.8);
+        // exit to the logo lock-up ("This is Zygo." @8.6)
+        tl.to("#hk-dev", { x: 700, rotation: 6, opacity: 0, duration: 0.55, ease: "power3.in" }, 8.3);
+        tl.to("#hk-tag-u", { opacity: 0, duration: 0.2 }, 8.3);
+        tl.to("#hk-brand, #hk-live", { opacity: 0, duration: 0.3 }, 8.35);
+        tl.fromTo("#hk-endlogo", { scale: 0.3, opacity: 0, rotation: -20 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.7, ease: "back.out(1.9)" }, 8.6);
+        tl.fromTo("#hk-endword", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, 8.8);
+        tl.fromTo("#hk-t1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 9.6);
+        tl.fromTo("#hk-t2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 10.45);
+        window.__timelines["hook"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

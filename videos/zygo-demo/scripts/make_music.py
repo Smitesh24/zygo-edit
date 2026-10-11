@@ -13,7 +13,7 @@ SR = 44100
 BPM = 100
 BEAT = 60 / BPM
 BAR = 4 * BEAT
-N_BARS = 64
+N_BARS = 65
 LENGTH = N_BARS * BAR + 3.0  # reverb tail
 N = int(LENGTH * SR)
 rng = np.random.default_rng(7)
@@ -32,18 +32,20 @@ VOICINGS = {
     "C#m": ([56, 61, 64, 68], 37),
     "E": ([56, 59, 64, 68], 40),
 }
-SECTIONS = [  # (name, first bar, chords)
-    ("title", 0, ["A", "E/G#", "F#m", "D", "D"]),
-    ("problem", 5, ["F#m", "D", "Bm", "C#m", "F#m", "E"]),
-    ("solution", 11, ["A", "E", "F#m", "D", "A", "E"]),
-    ("demo", 17, (["A", "D", "F#m", "E"] * 7)[:27]),
-    ("impact", 44, ["D", "A", "E", "F#m", "D", "A", "E"]),
-    ("traction", 51, ["F#m", "D", "A", "E", "F#m", "D", "A", "E", "E"]),
-    ("outro", 60, ["D", "E", "A", "A"]),
+SECTIONS = [  # (name, first bar, chords) — hook first (app demo), then the explanation
+    ("hook", 0, ["A", "E/G#", "F#m", "D", "E"]),
+    ("demo", 5, (["A", "D", "F#m", "E"] * 7)[:27]),
+    ("problem", 32, ["F#m", "D", "Bm", "C#m", "F#m", "D", "E"]),
+    ("solution", 39, ["A", "E", "F#m", "D", "A", "E"]),
+    ("impact", 45, ["D", "A", "E", "F#m", "D", "A", "E"]),
+    ("traction", 52, ["F#m", "D", "A", "E", "F#m", "D", "A", "E", "E"]),
+    ("outro", 61, ["D", "E", "A", "A"]),
 ]
 CHORD_AT = {}
 SECTION_AT = {}
+SEC_START = {}
 for name, start, chords in SECTIONS:
+    SEC_START[name] = start
     for i, c in enumerate(chords):
         CHORD_AT[start + i] = c
         SECTION_AT[start + i] = name
@@ -253,84 +255,79 @@ ARP_PATTERN = [0, 2, 1, 3, 2, 1, 3, 2]  # indices into the voicing, 8ths
 
 for bar in range(N_BARS):
     sec = SECTION_AT[bar]
+    rel = bar - SEC_START[sec]
     chord, bass_m = VOICINGS[CHORD_AT[bar]]
     t0 = t_of(bar)
     last = bar == N_BARS - 1
 
-    # Pad: every section, sustained per bar (longer ring on the final chord)
-    pad_gain = {"title": 0.55, "problem": 0.5, "solution": 0.42, "demo": 0.36, "impact": 0.42, "traction": 0.42, "outro": 0.55}[sec]
+    pad_gain = {"hook": 0.42, "problem": 0.5, "solution": 0.42, "demo": 0.36, "impact": 0.42, "traction": 0.42, "outro": 0.55}[sec]
     for m in chord:
         add(pad, t0, pad_note(m, BAR * (2.0 if last else 1.0)).sum(axis=1) * 0.5, pad_gain / len(chord) * 2.2)
 
     # Arp
-    arp_on = sec in ("title", "solution", "impact", "traction", "outro") or (sec == "demo" and bar >= 25)
-    if sec == "problem":
-        arp_on = bar >= 7
-    if arp_on and not (sec == "outro" and bar >= 62):
-        bright = {"title": 0.7, "problem": 0.55, "solution": 1.1, "demo": 0.75, "impact": 1.1, "traction": 1.25, "outro": 0.8}[sec]
-        g = {"title": 0.32, "problem": 0.22, "solution": 0.34, "demo": 0.22, "impact": 0.33, "traction": 0.36, "outro": 0.3}[sec]
-        for s, k in enumerate(ARP_PATTERN):
+    arp_on = sec in ("hook", "solution", "impact", "traction", "outro") or (sec == "demo" and rel >= 8) or (sec == "problem" and rel >= 2)
+    if arp_on and not (sec == "outro" and rel >= 2):
+        bright = {"hook": 1.2, "problem": 0.55, "solution": 1.1, "demo": 0.75, "impact": 1.1, "traction": 1.25, "outro": 0.8}[sec]
+        g = {"hook": 0.34, "problem": 0.22, "solution": 0.34, "demo": 0.22, "impact": 0.33, "traction": 0.36, "outro": 0.3}[sec]
+        for s_, k in enumerate(ARP_PATTERN):
             m = chord[k % len(chord)] + 12
-            add(arp, t0 + s * BEAT / 2, pluck(m, 0.5, bright), g, pan=(-0.35 if s % 2 else 0.35))
+            add(arp, t0 + s_ * BEAT / 2, pluck(m, 0.5, bright), g, pan=(-0.35 if s_ % 2 else 0.35))
 
-    # Lead bell counter-melody in traction + impact second half
-    if sec == "traction" or (sec == "impact" and bar >= 47):
+    # Lead bell counter-melody: hook, traction and the back half of impact
+    if sec in ("hook", "traction") or (sec == "impact" and rel >= 3):
         tones = [chord[3] + 12, chord[2] + 12, chord[1] + 12, chord[2] + 12]
         for q, m in enumerate(tones):
-            if q in (0, 2) or sec == "traction":
-                add(lead, t0 + q * BEAT, bell(m), 0.22 if sec == "traction" else 0.16, pan=0.15)
+            if q in (0, 2) or sec != "impact":
+                add(lead, t0 + q * BEAT, bell(m), 0.2 if sec != "impact" else 0.16, pan=0.15)
 
     # Bass
-    if sec in ("solution", "demo", "impact", "traction") or (sec == "problem") or (sec == "outro" and bar < 62):
-        if sec == "problem":
-            for e in range(8):
-                add(bass, t0 + e * BEAT / 2, bass_note(bass_m, BEAT / 2 * 0.8), 0.32 if e % 2 == 0 else 0.2)
-        else:
-            pattern = [0, 0.5, 1.5, 2, 2.5, 3.5] if sec != "demo" else [0, 1.5, 2, 3.5]
-            for b in pattern:
-                add(bass, t0 + b * BEAT, bass_note(bass_m, BEAT * 0.45), 0.42)
-    elif sec == "title" and bar >= 2:
-        add(bass, t0, bass_note(bass_m, BAR * 0.95), 0.3)
+    if sec == "problem":
+        for e in range(8):
+            add(bass, t0 + e * BEAT / 2, bass_note(bass_m, BEAT / 2 * 0.8), 0.32 if e % 2 == 0 else 0.2)
+    elif sec != "outro" or rel < 2:
+        pattern = [0, 1.5, 2, 3.5] if sec == "demo" else [0, 0.5, 1.5, 2, 2.5, 3.5]
+        for b_ in pattern:
+            add(bass, t0 + b_ * BEAT, bass_note(bass_m, BEAT * 0.45), 0.42)
 
     # Drums
-    four_floor = sec in ("solution", "impact", "traction") or (sec == "demo" and bar < 43) or (sec == "outro" and bar < 62)
+    four_floor = sec in ("hook", "solution", "impact", "traction") or (sec == "demo" and rel < 26) or (sec == "outro" and rel < 2)
     if four_floor:
         kg = 0.38 if sec == "demo" else 0.48
-        for b in range(4):
-            add(drums, t0 + b * BEAT, KICK, kg)
-            kick_times.append(t0 + b * BEAT)
-        hats_on = sec != "demo" or bar >= 21
+        for b_ in range(4):
+            add(drums, t0 + b_ * BEAT, KICK, kg)
+            kick_times.append(t0 + b_ * BEAT)
+        hats_on = sec != "demo" or rel >= 4
         if hats_on:
             for e in range(8):
                 if e % 2 == 1:
-                    add(drums, t0 + e * BEAT / 2, HAT_O if (sec in ("traction", "impact") and e == 7) else HAT, 1.5 if sec != "demo" else 1.1, pan=0.25)
-                elif sec in ("impact", "traction"):
+                    add(drums, t0 + e * BEAT / 2, HAT_O if (sec in ("traction", "impact", "hook") and e == 7) else HAT, 1.5 if sec != "demo" else 1.1, pan=0.25)
+                elif sec in ("impact", "traction", "hook"):
                     add(drums, t0 + e * BEAT / 2, HAT, 0.7, pan=-0.25)
-        clap_on = sec in ("solution", "impact", "traction") or (sec == "demo" and 33 <= bar < 41)
+        clap_on = sec in ("hook", "solution", "impact", "traction") or (sec == "demo" and 16 <= rel < 24)
         if clap_on:
-            for b in (1, 3):
-                add(drums, t0 + b * BEAT, CLAP, 0.6 if sec != "demo" else 0.4, pan=-0.05)
-    if sec in ("demo", "impact", "traction") and not (sec == "demo" and bar >= 43):
+            for b_ in (1, 3):
+                add(drums, t0 + b_ * BEAT, CLAP, 0.6 if sec != "demo" else 0.4, pan=-0.05)
+    if sec in ("demo", "impact", "traction", "hook") and not (sec == "demo" and rel >= 26):
         for e in range(16):
             n_ = idx(0.06)
             sh = highpass(rng.standard_normal(n_), 5000, 2) * np.exp(-np.arange(n_) / SR / 0.02)
             add(shaker, t0 + e * BEAT / 4, sh, (0.09 if e % 4 == 2 else 0.05) * (0.8 if sec == "demo" else 1.0), pan=0.45)
-    if not four_floor and sec == "problem":
+    if sec == "problem":
         for e in range(8):
             add(drums, t0 + e * BEAT / 2, TICK, 0.5 if e % 2 else 0.3, pan=0.3)
-    if not four_floor and sec == "problem":
-        if bar >= 9:
-            for b in (0, 2):
-                add(drums, t0 + b * BEAT, KICK, 0.45)
-                kick_times.append(t0 + b * BEAT)
+        if rel >= 5:
+            for b_ in (0, 2):
+                add(drums, t0 + b_ * BEAT, KICK, 0.45)
+                kick_times.append(t0 + b_ * BEAT)
 
 # Risers into the big moments and impacts on them
-add(fx, t_of(9), riser(2 * BAR), 0.5)  # into "Zygo flips that"
-add(fx, t_of(42), riser(2 * BAR), 0.35)  # into impact
-add(fx, t_of(50), riser(BAR), 0.4)  # into traction
-add(fx, t_of(59), riser(BAR), 0.4)  # into outro
-for bar in (0, 11, 44, 51, 60):
-    add(fx, t_of(bar), boom(), 0.55 if bar else 0.7)
+add(fx, t_of(4), riser(BAR), 0.35)  # hook -> demo
+add(fx, t_of(37), riser(2 * BAR), 0.5)  # into "Zygo flips that"
+add(fx, t_of(44), riser(BAR), 0.35)  # into impact
+add(fx, t_of(51), riser(BAR), 0.4)  # into traction
+add(fx, t_of(60), riser(BAR), 0.4)  # into outro
+for bar, g in ((0, 0.7), (5, 0.35), (39, 0.55), (45, 0.5), (52, 0.55), (61, 0.6)):
+    add(fx, t_of(bar), boom(), g)
 
 # ---------------------------------------------------------------- mix
 # Sidechain the pad and bass to the kick
@@ -346,7 +343,7 @@ pad = lowpass(pad, 4200) * duck[:, None]
 # Darker pad during the problem section: crossfade a lowpassed copy in
 dark = lowpass(pad, 900, 2)
 w = np.zeros(N)
-a, b = idx(t_of(5)), idx(t_of(11))
+a, b = idx(t_of(32)), idx(t_of(39))
 w[a:b] = 1
 w = np.convolve(w, np.ones(idx(0.6)) / idx(0.6), mode="same")
 pad = pad * (1 - w[:, None]) + dark * w[:, None]

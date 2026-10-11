@@ -80,7 +80,7 @@
         [data-composition-id="problem"] .pr-head {
           position: absolute;
           left: 96px;
-          top: 176px;
+          top: 190px;
           width: 1728px;
           font-size: 82px;
           font-weight: 800;
@@ -98,9 +98,9 @@
         [data-composition-id="problem"] .pr-sub {
           position: absolute;
           left: 96px;
-          top: 300px;
+          top: 306px;
           width: 1240px;
-          font-size: 34px;
+          font-size: 32px;
           line-height: 1.4;
           color: #3d3a38;
         }
@@ -147,6 +147,21 @@
         [data-composition-id="problem"] .pr-inner {
           position: relative;
         }
+        [data-composition-id="problem"] .pr-ico {
+          display: block;
+          width: 60px;
+          height: 60px;
+          margin-bottom: 14px;
+        }
+        [data-composition-id="problem"] .pr-kick {
+          position: absolute;
+          left: 96px;
+          top: 150px;
+          font-size: 22px;
+          font-weight: 700;
+          letter-spacing: 0.24em;
+          color: #0a5cf5;
+        }
         [data-composition-id="problem"] .pr-num {
           display: block;
           font-size: 22px;
@@ -176,6 +191,7 @@
         <div class="pr-wrap" id="pr-wrap">
           <div class="pr-hdr" id="pr-hdr"><span><b>02</b> — THE PROBLEM</span><span>ZYGO.CASH</span></div>
           <div class="pr-hrule" id="pr-hrule"></div>
+          <div class="pr-kick" id="pr-kick">SO WHY DOES THIS MATTER?</div>
           <div class="pr-head">
             <span class="pr-head-line"><span id="pr-h1">Cashing out crypto today is a gamble.</span></span>
           </div>
@@ -187,6 +203,7 @@
             <div class="pr-col" id="pr-c1">
               <div class="pr-hi" id="pr-hi1"></div>
               <div class="pr-inner">
+                <svg class="pr-ico" id="pr-i1" viewBox="0 0 64 64" fill="none" stroke="#0a5cf5" stroke-width="3.5" stroke-linecap="round"><circle cx="16" cy="24" r="7"/><path d="M4 50a12 12 0 0 1 24 0"/><circle cx="48" cy="24" r="7"/><path d="M36 50a12 12 0 0 1 24 0"/><path d="M28 9a4 4 0 1 1 6 3.4c-2 1.1-3 2-3 4.1"/><circle cx="31" cy="21" r="0.6" fill="#0a5cf5"/></svg>
                 <span class="pr-num">P2P DESKS</span>
                 <span class="pr-ttl">Sell to a stranger.</span>
                 <span class="pr-body">Most cash-outs still run through unknown P2P counterparties.</span>
@@ -195,6 +212,7 @@
             <div class="pr-col" id="pr-c2">
               <div class="pr-hi" id="pr-hi2"></div>
               <div class="pr-inner">
+                <svg class="pr-ico" id="pr-i2" viewBox="0 0 64 64" fill="none" stroke="#0a5cf5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24L28 12l22 12z"/><path d="M12 28v18M22 28v18M34 28v18M44 28v18M4 50h48"/><rect x="40" y="38" width="20" height="16" rx="3" fill="#f3f2f2"/><path d="M44 38v-4a6 6 0 0 1 12 0v4"/></svg>
                 <span class="pr-num">FROZEN ACCOUNTS</span>
                 <span class="pr-ttl">One bad buyer can lock your bank account.</span>
                 <span class="pr-body">Flagged P2P deposits get the receiver's account frozen.</span>
@@ -203,6 +221,7 @@
             <div class="pr-col" id="pr-c3">
               <div class="pr-hi" id="pr-hi3"></div>
               <div class="pr-inner">
+                <svg class="pr-ico" id="pr-i3" viewBox="0 0 64 64" fill="none" stroke="#0a5cf5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6h40v52l-7-5-6 5-7-5-6 5-7-5-7 5z"/><circle cx="24" cy="22" r="4"/><circle cx="40" cy="38" r="4"/><path d="M42 18L22 42"/></svg>
                 <span class="pr-num">HEAVY TAX</span>
                 <span class="pr-ttl">Up to 30% in India, plus 1% TDS.</span>
                 <span class="pr-body">Every sell-and-withdraw cycle is a taxable event.</span>
@@ -211,6 +230,7 @@
             <div class="pr-col" id="pr-c4">
               <div class="pr-hi" id="pr-hi4"></div>
               <div class="pr-inner">
+                <svg class="pr-ico" id="pr-i4" viewBox="0 0 64 64" fill="none" stroke="#0a5cf5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6v52h52"/><path d="M12 44l12-10 10 6 20-22"/><path d="M12 52l12-6 10 4 20-12" stroke-dasharray="4 5"/></svg>
                 <span class="pr-num">BAD FOREX</span>
                 <span class="pr-ttl">Hidden spreads on every conversion.</span>
                 <span class="pr-body">Desks price above market, and the true cost stays hidden.</span>
@@ -219,6 +239,7 @@
             <div class="pr-col" id="pr-c5">
               <div class="pr-hi" id="pr-hi5"></div>
               <div class="pr-inner">
+                <svg class="pr-ico" id="pr-i5" viewBox="0 0 64 64" fill="none" stroke="#0a5cf5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 6h32M16 58h32"/><path d="M20 6c0 14 24 18 24 26S20 44 20 58M44 6c0 14-24 18-24 26s24 12 24 26"/></svg>
                 <span class="pr-num">SLOW SETTLEMENT</span>
                 <span class="pr-ttl">Sell, withdraw, wait, then spend.</span>
                 <span class="pr-body">Money sits in transit before it can be used.</span>
@@ -232,20 +253,25 @@
         const tl = gsap.timeline({ paused: true });
         tl.fromTo("#pr-hdr", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.15);
         tl.fromTo("#pr-hrule", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" }, 0.2);
-        // problem-1 @0.3: "Because today, cashing out crypto is a gamble."
-        tl.fromTo("#pr-h1", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.45);
-        tl.fromTo("#pr-sub", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 1.6);
-        tl.fromTo("#pr-top", { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "expo.inOut" }, 2.4);
-        // problem-2 @3.4 — one pain per clause
-        const beats = [3.42, 6.22, 8.56, 10.73, 12.44];
+        // problem-1 @0.3: "So why does this matter?" 0.3 / "Today, cashing out crypto is a gamble." 1.71
+        tl.fromTo("#pr-kick", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.35);
+        tl.fromTo("#pr-h1", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 1.6);
+        tl.fromTo("#pr-sub", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 2.9);
+        tl.fromTo("#pr-top", { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "expo.inOut" }, 3.4);
+        // problem-2 @4.5 — one pain per clause
+        const beats = [4.52, 7.32, 9.66, 11.83, 13.54];
         beats.forEach((t, i) => {
           const n = i + 1;
           tl.fromTo(`#pr-c${n} .pr-inner`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, t - 0.1);
+          tl.fromTo(`#pr-i${n}`, { scale: 0.3, rotation: -25 }, { scale: 1, rotation: 0, duration: 0.6, ease: "back.out(2.6)" }, t);
           tl.fromTo(`#pr-hi${n}`, { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: "power3.out" }, t - 0.1);
           const next = beats[i + 1];
           if (next) tl.to(`#pr-hi${n}`, { scaleY: 0, transformOrigin: "50% 100%", duration: 0.4, ease: "power2.in" }, next - 0.15);
         });
-        tl.to("#pr-wrap", { x: -60, opacity: 0, duration: 0.45, ease: "power2.in" }, 13.85);
+        // icon micro-motions
+        tl.to("#pr-i2", { x: 4, duration: 0.06, repeat: 7, yoyo: true, ease: "none" }, 8.0);
+        tl.to("#pr-i5", { rotation: 180, duration: 0.8, ease: "power3.inOut" }, 14.4);
+        tl.to("#pr-wrap", { x: -60, opacity: 0, duration: 0.45, ease: "power2.in" }, 16.25);
         window.__timelines["problem"] = tl;
       </script>
     </template>

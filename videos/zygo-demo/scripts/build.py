@@ -6,28 +6,28 @@ ROOT = Path(__file__).resolve().parent.parent
 VO_DUR = json.loads((ROOT / "assets/vo/durations.json").read_text())
 
 # ------------------------------------------------------------------ master grid (100 BPM, bar = 2.4s)
-SCENES = [  # id, start, duration
-    ("title", 0.0, 12.0),
-    ("problem", 12.0, 14.4),
-    ("solution", 26.4, 14.4),
-    ("demo", 40.8, 64.8),
-    ("impact", 105.6, 16.8),
-    ("traction", 122.4, 21.6),
-    ("outro", 144.0, 9.6),
+SCENES = [  # id, start, duration — app demo first (hook + full demo), then the explanation
+    ("hook", 0.0, 12.0),
+    ("demo", 12.0, 64.8),
+    ("problem", 76.8, 16.8),
+    ("solution", 93.6, 14.4),
+    ("impact", 108.0, 16.8),
+    ("traction", 124.8, 21.6),
+    ("outro", 146.4, 9.6),
 ]
-TOTAL = 153.6
-DEMO0 = 40.8
+TOTAL = 156.0
+DEMO0 = 12.0
 
 VO = [  # id, absolute start
-    ("title-1", 1.2), ("title-2", 4.5),
-    ("problem-1", 12.3), ("problem-2", 15.4),
-    ("solution-1", 26.7), ("solution-2", 30.2),
+    ("hook-1", 0.5), ("hook-2", 4.2), ("hook-3", 8.6),
     ("demo-intro", DEMO0 + 0.3), ("demo-scan", DEMO0 + 7.8), ("demo-quote", DEMO0 + 14.2),
     ("demo-escrow", DEMO0 + 21.6), ("demo-accept", DEMO0 + 29.8), ("demo-payout", DEMO0 + 35.3),
     ("demo-confirm", DEMO0 + 44.4), ("demo-settle", DEMO0 + 52.9),
-    ("impact-1", 105.9), ("impact-2", 108.7),
-    ("traction-1", 122.8), ("traction-2", 136.6),
-    ("outro", 144.6),
+    ("problem-1", 77.1), ("problem-2", 81.3),
+    ("solution-1", 93.9), ("solution-2", 97.4),
+    ("impact-1", 108.3), ("impact-2", 111.1),
+    ("traction-1", 125.2), ("traction-2", 139.0),
+    ("outro", 147.0),
 ]
 
 # ------------------------------------------------------------------ demo edit decision list
@@ -119,11 +119,7 @@ STATES = [
     (42.6, "fiat_sent"), (49.7, "user_confirmed"), (52.6, "settling"), (55.6, "completed"),
 ]
 CALLOUTS = [  # id, T0, T1, left, top, text, accent
-    ("c1", 15.0, 19.3, 1150, 470, "Full cost upfront: 0.0960 USDC", "blue"),
-    ("c2", 26.6, 29.3, 1150, 760, "USDC locked in Solana escrow", "blue"),
-    ("c4", 49.9, 52.4, 1150, 600, "Confirmed with a signed message", "blue"),
-    ("c5", 55.7, 58.5, 860, 600, "USDC received: 64.7 → 64.8", "ink"),
-    ("c6", 59.1, 62.2, 860, 330, "You received 0.10 USDC · Completed", "ink"),
+    ("c6", 59.1, 62.2, 860, 330, "You received 0.10 USDC \u00b7 Completed", "ink"),
 ]
 
 PANEL_W, PANEL_H = 517, 900
@@ -249,37 +245,42 @@ def build_demo():
 # ------------------------------------------------------------------ sound design (absolute seconds)
 def sfx_list():
     D = DEMO0
+    P, SO, IM, TR, OU = 76.8, 93.6, 108.0, 124.8, 146.4
     s = []
-    for c in (12.0, 26.4, 40.8, 105.6, 122.4):
+    for c in (12.0, P, SO, IM, TR):
         s.append(("whoosh", c - 0.5, 0.42))
-    for t in (3.32, 6.12, 8.46, 10.63, 12.34):
-        s.append(("pop", 12.0 + t, 0.22))
-    for t in (3.8, 5.5, 8.22, 9.68):
-        s.append(("pop", 26.4 + t, 0.26))
+    # hook: punchy beat changes
+    s += [("pop", 0.45, 0.3), ("whoosh-soft", 1.0, 0.3), ("whoosh-soft", 2.0, 0.35), ("pop", 2.6, 0.3),
+          ("whoosh-soft", 4.1, 0.35), ("pop", 4.75, 0.3), ("click", 6.35, 0.55), ("success", 6.6, 0.45),
+          ("whoosh", 8.25, 0.35), ("thud", 8.62, 0.45)]
     # demo
     s += [
         ("whoosh-soft", D + 0.3, 0.35), ("pop", D + 3.05, 0.25), ("pop", D + 5.0, 0.25),
         ("pop", D + 8.15, 0.3), ("tick", D + 9.55, 0.35),
         ("key", D + 11.12, 0.5), ("key", D + 11.22, 0.5), ("click", D + 13.65, 0.55),
-        ("whoosh-soft", D + 14.2, 0.25), ("click", D + 19.63, 0.55),
+        ("pop", D + 15.0, 0.28), ("whoosh-soft", D + 15.3, 0.25), ("pop", D + 16.05, 0.3),
+        ("click", D + 19.63, 0.55),
         ("whoosh-soft", D + 21.15, 0.4), ("click", D + 22.85, 0.6), ("pop", D + 23.8, 0.3),
-        ("whoosh-soft", D + 24.25, 0.3),
+        ("whoosh-soft", D + 24.25, 0.3), ("pop", D + 24.6, 0.25), ("thud", D + 25.5, 0.35), ("tick", D + 25.9, 0.4),
         ("ping", D + 26.05, 0.45), ("click", D + 33.25, 0.6),
-        ("pop", D + 36.1, 0.3), ("click", D + 39.15, 0.55), ("click", D + 42.5, 0.55),
+        ("pop", D + 36.1, 0.28), ("whoosh-soft", D + 36.55, 0.3), ("tick", D + 37.5, 0.4),
+        ("click", D + 39.15, 0.55), ("click", D + 42.5, 0.55),
         ("click", D + 47.25, 0.6), ("whoosh-soft", D + 47.35, 0.4), ("click", D + 49.0, 0.6),
-        ("success", D + 49.75, 0.45), ("click", D + 52.2, 0.5), ("pop", D + 52.75, 0.3),
-        ("thud", D + 56.0, 0.4), ("pop", D + 59.1, 0.3), ("success", D + 62.5, 0.4),
+        ("success", D + 49.75, 0.45), ("thud", D + 50.1, 0.3), ("click", D + 52.2, 0.5), ("pop", D + 52.75, 0.3),
+        ("pop", D + 55.4, 0.28), ("whoosh-soft", D + 56.0, 0.3), ("tick", D + 56.95, 0.4),
+        ("pop", D + 59.1, 0.3), ("success", D + 62.5, 0.4),
     ]
-    for cid, t0, *_ in CALLOUTS:
-        if cid in ("c1", "c2", "c4"):
-            s.append(("pop", D + t0, 0.22))
-    # impact + traction
+    for t in (4.52, 7.32, 9.66, 11.83, 13.54):
+        s.append(("pop", P + t, 0.24))
+    for t in (3.8, 5.5, 8.22, 9.68):
+        s.append(("pop", SO + t, 0.26))
+    s.append(("success", SO + 10.35, 0.3))
     for t in (3.1, 5.74, 9.62, 12.1):
-        s.append(("pop", 105.6 + t, 0.25))
-    s += [("thud", 122.4 + 3.1, 0.3), ("thud", 122.4 + 5.55, 0.3), ("thud", 122.4 + 12.28, 0.3),
-          ("pop", 122.4 + 7.85, 0.25), ("pop", 122.4 + 8.9, 0.25),
-          ("pop", 122.4 + 14.2, 0.25), ("pop", 122.4 + 16.95, 0.25),
-          ("pop", 144.0 + 0.55, 0.3)]
+        s.append(("pop", IM + t, 0.25))
+    s += [("thud", TR + 3.1, 0.3), ("thud", TR + 5.55, 0.3), ("thud", TR + 12.28, 0.3),
+          ("pop", TR + 7.85, 0.25), ("pop", TR + 8.9, 0.25),
+          ("pop", TR + 14.2, 0.25), ("pop", TR + 16.95, 0.25),
+          ("pop", OU + 0.55, 0.3)]
     return sorted(s, key=lambda x: x[1])
 
 
@@ -287,7 +288,7 @@ def music_lane():
     """Bed level: full between lines, ducked under the voice with short ramps."""
     hi, lo, ramp = 0.62, 0.2, 0.3
     windows = sorted((t, t + VO_DUR[k]) for k, t in VO)
-    pts = [(0.0, 0.75), (0.9, 0.75)]
+    pts = [(0.0, 0.8), (0.3, 0.8)]
     for a, b in windows:
         pts.append((max(a - ramp, pts[-1][0] + 0.01), hi))
         pts.append((a, lo))
@@ -324,7 +325,7 @@ def build_index():
         f'<audio id="music" src="assets/audio/music.wav" data-start="0" data-duration="{TOTAL}" data-track-index="30" '
         f"data-volume=\"1\" data-automation='{lane}'></audio>"
     )
-    wipes = [(12.0, "#0a5cf5"), (26.4, "#0a5cf5"), (40.8, "#0a5cf5"), (105.6, "#0a5cf5"), (122.4, "#04143c")]
+    wipes = [(12.0, "#04143c"), (76.8, "#0a5cf5"), (93.6, "#0a5cf5"), (108.0, "#0a5cf5"), (124.8, "#04143c")]
     wipe_divs = "\n      ".join(
         f'<div class="wipe" id="wipe{i}" style="background:{c}"><div class="wipe-logo"></div></div>'
         for i, (_t, c) in enumerate(wipes)

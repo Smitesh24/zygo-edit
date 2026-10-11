@@ -446,6 +446,109 @@
           font-size: 22px;
           color: #d8d6d4;
         }
+        [data-composition-id="demo"] .dm-fx {
+          position: absolute;
+          padding: 24px 28px 26px 28px;
+          background: #ffffff;
+          border-radius: 26px;
+          box-shadow: 0 0 0 3px #0a5cf5, 0 28px 64px rgba(4, 20, 60, 0.32);
+          opacity: 0;
+        }
+        [data-composition-id="demo"] .dm-fx-navy {
+          background: #04143c;
+          color: #ffffff;
+          box-shadow: 0 0 0 3px #6fa0ff, 0 28px 64px rgba(4, 20, 60, 0.4);
+        }
+        [data-composition-id="demo"] .dm-fx-k {
+          display: block;
+          font-size: 16px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          color: #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-fx-navy .dm-fx-k {
+          color: #6fa0ff;
+        }
+        [data-composition-id="demo"] .dm-fx-t {
+          display: block;
+          margin-top: 8px;
+          font-size: 30px;
+          font-weight: 800;
+          line-height: 1.15;
+        }
+        [data-composition-id="demo"] .dm-fx-s {
+          display: block;
+          margin-top: 6px;
+          font-size: 20px;
+          line-height: 1.35;
+          color: #5b5856;
+        }
+        [data-composition-id="demo"] .dm-fx-navy .dm-fx-s {
+          color: #d3ddf7;
+        }
+        [data-composition-id="demo"] .dm-stage {
+          position: relative;
+          height: 120px;
+          margin-top: 16px;
+        }
+        [data-composition-id="demo"] .dm-coin {
+          position: absolute;
+          width: 76px;
+          height: 76px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 38px;
+          font-weight: 800;
+          box-shadow: 0 10px 22px rgba(4, 20, 60, 0.28);
+        }
+        [data-composition-id="demo"] .dm-coin-usdc {
+          background: #ffffff;
+          color: #0a5cf5;
+          border: 6px solid #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-coin-inr {
+          background: #04143c;
+          color: #ffffff;
+          border: 6px solid #6fa0ff;
+        }
+        [data-composition-id="demo"] .dm-cap {
+          position: absolute;
+          font-size: 24px;
+          font-weight: 800;
+          white-space: nowrap;
+        }
+        [data-composition-id="demo"] .dm-ib {
+          position: absolute;
+          width: 96px;
+          height: 96px;
+          border-radius: 22px;
+          background: #e4ecfd;
+        }
+        [data-composition-id="demo"] .dm-fx-navy .dm-ib {
+          background: rgba(111, 160, 255, 0.18);
+        }
+        [data-composition-id="demo"] .dm-ib svg {
+          display: block;
+          width: 96px;
+          height: 96px;
+        }
+        [data-composition-id="demo"] .dm-dash {
+          position: absolute;
+          height: 5px;
+          background-image: linear-gradient(90deg, #0a5cf5 50%, transparent 50%);
+          background-size: 20px 5px;
+          transform-origin: 0 50%;
+        }
+        [data-composition-id="demo"] .dm-fx-navy .dm-dash {
+          background-image: linear-gradient(90deg, #6fa0ff 50%, transparent 50%);
+        }
+        [data-composition-id="demo"] .dm-badge {
+          position: absolute;
+          width: 40px;
+          height: 40px;
+        }
         [data-composition-id="demo"] .dm-wallet {
           position: absolute;
           inset: 0;
@@ -491,7 +594,7 @@
         <div class="dm-bg"></div>
         <div class="dm-glow" id="dm-glow"></div>
         <div class="dm-ui" id="dm-uiw">
-          <div class="dm-hdr" id="dm-hdr"><span><b>04</b> — LIVE DEMO</span><span>ZYGO.CASH</span></div>
+          <div class="dm-hdr" id="dm-hdr"><span><b>01</b> — LIVE DEMO</span><span>ZYGO.CASH</span></div>
           <div class="dm-hrule" id="dm-hrule"></div>
           <div class="dm-head">
             <span class="dm-hl"><span id="dm-h1">A merchant payment,</span></span>
@@ -553,13 +656,66 @@
           <div><span class="dm-req-t">New payment request</span><span class="dm-req-s">ord_00000179 · ₹10 · offered to verified LPs</span></div>
         </div>
 
-        <div class="dm-card dm-upi" id="dm-upi" style="left: {{LX}}px; top: 196px">
-          <span class="dm-k">PROVIDER → MERCHANT</span>
-          <span class="dm-upi-t">
-            <svg viewBox="0 0 32 32" width="38" height="38"><circle cx="16" cy="16" r="15" fill="#6fa0ff" /><path d="M9 16.5l4.5 4.5L23 11.5" fill="none" stroke="#04143c" stroke-width="3.2" /></svg>
-            ₹10 paid via UPI
-          </span>
-          <span class="dm-upi-s">Straight to the cafe's UPI QR, from the provider's own account.</span>
+
+        <!-- interactive transfer assets -->
+        <div class="dm-fx" id="dm-fx-quote" style="left: 1218px; top: 420px; width: 540px">
+          <span class="dm-fx-k">LIVE QUOTE · FULL COST UPFRONT</span>
+          <div class="dm-stage">
+            <div class="dm-coin dm-coin-inr" id="dm-q-inr" style="left: 0; top: 0">₹</div>
+            <span class="dm-cap" style="left: 90px; top: 20px">₹10.00</span>
+            <div class="dm-dash" id="dm-q-dash" style="left: 196px; top: 36px; width: 84px"></div>
+            <div class="dm-coin dm-coin-usdc" id="dm-q-usdc" style="left: 292px; top: 0">$</div>
+            <span class="dm-cap" style="left: 382px; top: 4px">0.0960</span>
+            <span class="dm-cap" style="left: 382px; top: 36px; font-size: 20px; color: #0a5cf5">USDC</span>
+          </div>
+          <span class="dm-fx-s">All-in rate 1 USDC = ₹104.17 · fees included</span>
+        </div>
+
+        <div class="dm-fx dm-fx-navy" id="dm-fx-escrow" style="left: 1240px; top: 640px; width: 520px">
+          <span class="dm-fx-k">SOLANA ESCROW</span>
+          <div class="dm-stage">
+            <div class="dm-ib" style="left: 0; top: 12px"><svg viewBox="0 0 96 96" fill="none" stroke="#ffffff" stroke-width="5"><rect x="20" y="42" width="56" height="38" rx="6"/><path id="dm-e-shackle" d="M32 42v-9a16 16 0 0 1 32 0v9"/><path d="M48 56v10"/></svg></div>
+            <div class="dm-coin dm-coin-usdc" id="dm-e-coin" style="left: 10px; top: 22px">$</div>
+            <span class="dm-cap" style="left: 124px; top: 22px; font-size: 30px">0.0960 USDC locked</span>
+            <span class="dm-cap" style="left: 124px; top: 64px; font-size: 20px; font-weight: 500; color: #d3ddf7">Held until the payout is verified</span>
+          </div>
+        </div>
+
+        <div class="dm-fx" id="dm-fx-upi" style="left: 660px; top: 380px; width: 560px">
+          <span class="dm-fx-k">PROVIDER → MERCHANT · VIA UPI</span>
+          <div class="dm-stage" style="height: 150px">
+            <div class="dm-ib" style="left: 0; top: 6px"><svg viewBox="0 0 96 96" fill="none" stroke="#0a5cf5" stroke-width="5"><path d="M18 40L48 22l30 18z"/><path d="M26 44v26M40 44v26M56 44v26M70 44v26M16 74h64"/></svg></div>
+            <div class="dm-dash" id="dm-u-dash" style="left: 108px; top: 52px; width: 288px"></div>
+            <div class="dm-coin dm-coin-inr" id="dm-u-coin" style="left: 104px; top: 16px">₹</div>
+            <div class="dm-ib" style="left: 408px; top: 6px"><svg viewBox="0 0 96 96" fill="none" stroke="#0a5cf5" stroke-width="5"><path d="M18 38l7-16h46l7 16"/><path d="M18 38h60v4a10 10 0 0 1-20 0 10 10 0 0 1-20 0 10 10 0 0 1-20 0z"/><path d="M24 52v24h48V52M42 76V62h12v14"/></svg></div>
+            <svg class="dm-badge" id="dm-u-chk" style="left: 476px; top: -6px" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="#0a5cf5"/><path d="M11 20.5l6 6L29 14" fill="none" stroke="#fff" stroke-width="4"/></svg>
+            <span class="dm-cap" style="left: 0; top: 112px; font-size: 18px; color: #5b5856">PROVIDER</span>
+            <span class="dm-cap" style="left: 352px; top: 112px; font-size: 18px; color: #5b5856">GLOCAL ARENA CAFE</span>
+          </div>
+          <span class="dm-fx-t">₹10 paid straight to the cafe</span>
+        </div>
+
+        <div class="dm-fx" id="dm-fx-sign" style="left: 1240px; top: 430px; width: 520px">
+          <div class="dm-stage" style="height: 110px; margin-top: 0">
+            <svg id="dm-s-seal" style="position: absolute; left: 0; top: 0; width: 104px; height: 104px" viewBox="0 0 104 104">
+              <circle cx="52" cy="52" r="48" fill="#0a5cf5" />
+              <circle cx="52" cy="52" r="38" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="6 5" />
+              <path d="M36 53l11 11 22-24" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="dm-cap" style="left: 126px; top: 10px; font-size: 30px">Signed in wallet</span>
+            <span class="dm-cap" style="left: 126px; top: 52px; font-size: 20px; font-weight: 500; color: #5b5856">"Merchant received this payment in full."</span>
+          </div>
+        </div>
+
+        <div class="dm-fx dm-fx-navy" id="dm-fx-settle" style="left: 660px; top: 300px; width: 560px">
+          <span class="dm-fx-k">ESCROW RELEASED → PROVIDER</span>
+          <div class="dm-stage" style="height: 130px">
+            <div class="dm-ib" style="left: 0; top: 6px"><svg viewBox="0 0 96 96" fill="none" stroke="#ffffff" stroke-width="5"><rect x="20" y="42" width="56" height="38" rx="6"/><path id="dm-r-shackle" d="M32 42v-9a16 16 0 0 1 32 0v9"/><path d="M48 56v10"/></svg></div>
+            <div class="dm-dash" id="dm-r-dash" style="left: 108px; top: 52px; width: 288px"></div>
+            <div class="dm-coin dm-coin-usdc" id="dm-r-coin" style="left: 104px; top: 16px">$</div>
+            <div class="dm-ib" style="left: 408px; top: 6px"><svg viewBox="0 0 96 96" fill="none" stroke="#ffffff" stroke-width="5"><path d="M18 30h56a4 4 0 0 1 4 4v38a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4z"/><path d="M18 30l44-12v12"/><path d="M60 50h18v12H60z"/></svg></div>
+          </div>
+          <span class="dm-fx-t">USDC received: 64.7 → 64.8</span>
         </div>
 
         {{CALLOUTS}}
@@ -622,8 +778,27 @@
         // ---- provider beats
         tl.fromTo("#dm-req", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }, 26.05);
         tl.to("#dm-req", { opacity: 0, y: -16, duration: 0.3, ease: "power2.in" }, 28.9);
-        tl.fromTo("#dm-upi", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }, 36.1);
-        tl.to("#dm-upi", { opacity: 0, y: -16, duration: 0.3, ease: "power2.in" }, 38.55);
+        // ---- interactive transfer assets
+        function fxIn(id, t) { tl.fromTo(id, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.7)" }, t); }
+        function fxOut(id, t) { tl.to(id, { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, t); }
+        fxIn("#dm-fx-quote", 15.0); fxOut("#dm-fx-quote", 19.3);
+        tl.fromTo("#dm-q-inr", { rotationY: 0 }, { rotationY: 360, duration: 0.8, ease: "power2.inOut" }, 15.3);
+        tl.fromTo("#dm-q-dash", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power2.out" }, 15.7);
+        tl.fromTo("#dm-q-usdc", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2.6)" }, 16.05);
+        fxIn("#dm-fx-escrow", 24.6); fxOut("#dm-fx-escrow", 29.2);
+        tl.fromTo("#dm-e-coin", { y: -150, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "bounce.out" }, 24.95);
+        tl.to("#dm-e-coin", { scale: 0.4, opacity: 0, duration: 0.3, ease: "power2.in" }, 25.6);
+        tl.fromTo("#dm-e-shackle", { y: -12 }, { y: 0, duration: 0.3, ease: "back.out(3)" }, 25.85);
+        fxIn("#dm-fx-upi", 36.1); fxOut("#dm-fx-upi", 38.7);
+        tl.fromTo("#dm-u-dash", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power2.out" }, 36.35);
+        tl.fromTo("#dm-u-coin", { x: 0 }, { x: 300, duration: 1.0, ease: "power2.inOut" }, 36.55);
+        tl.fromTo("#dm-u-chk", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(3)" }, 37.5);
+        fxIn("#dm-fx-sign", 49.9); fxOut("#dm-fx-sign", 52.4);
+        tl.fromTo("#dm-s-seal", { scale: 1.8, rotation: -40, opacity: 0, transformOrigin: "52px 52px" }, { scale: 1, rotation: 0, opacity: 1, duration: 0.5, ease: "power4.out" }, 50.05);
+        fxIn("#dm-fx-settle", 55.4); fxOut("#dm-fx-settle", 58.5);
+        tl.fromTo("#dm-r-shackle", { y: 0 }, { y: -12, duration: 0.3, ease: "power2.out" }, 55.7);
+        tl.fromTo("#dm-r-dash", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power2.out" }, 55.8);
+        tl.fromTo("#dm-r-coin", { x: 0 }, { x: 300, duration: 1.0, ease: "power2.inOut" }, 56.0);
         // ---- recap
         tl.fromTo("#dm-recap", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.55, ease: "back.out(1.6)" }, 62.55);
         // ---- generated: camera, focus, steps, order state, callouts

@@ -129,6 +129,13 @@
         [data-composition-id="impact"] .im-sol .im-hi {
           background: #ffffff;
         }
+        [data-composition-id="impact"] .im-ico {
+          position: absolute;
+          right: 28px;
+          top: 26px;
+          width: 64px;
+          height: 64px;
+        }
         [data-composition-id="impact"] .im-k {
           display: block;
           font-size: 22px;
@@ -163,31 +170,35 @@
         <div class="im-bg"></div>
         <div class="im-glow" id="im-glow"></div>
         <div class="im-wrap" id="im-wrap">
-          <div class="im-hdr" id="im-hdr"><span><b>05</b> — IMPACT</span><span>ZYGO.CASH</span></div>
+          <div class="im-hdr" id="im-hdr"><span><b>04</b> — IMPACT</span><span>ZYGO.CASH</span></div>
           <div class="im-hrule" id="im-hrule"></div>
           <div class="im-head">
             <span class="im-line"><span id="im-h1">Crypto becomes <span class="im-blue">spendable</span> in daily life.</span></span>
           </div>
           <div class="im-cards">
             <div class="im-card" id="im-c1">
+              <svg class="im-ico" id="im-i1" viewBox="0 0 64 64" fill="none" stroke="#0a5cf5" stroke-width="3.5"><circle cx="32" cy="32" r="24"/><path d="M8 32h48M32 8c8 7 8 41 0 48M32 8c-8 7-8 41 0 48"/></svg>
               <span class="im-k">EARNERS</span>
               <span class="im-t">Keep dollars, spend local.</span>
               <span class="im-b">Freelancers and remote workers hold USDC and pay for daily life without a risky cash-out.</span>
               <div class="im-hi" id="im-hi1"></div>
             </div>
             <div class="im-card" id="im-c2">
+              <svg class="im-ico" id="im-i2" viewBox="0 0 64 64" fill="none" stroke="#0a5cf5" stroke-width="3.5"><path d="M10 26l5-12h34l5 12"/><path d="M10 26h44v3a7 7 0 0 1-14.6 0 7 7 0 0 1-14.8 0A7 7 0 0 1 10 29z"/><path d="M14 36v18h36V36M28 54V44h8v10"/></svg>
               <span class="im-k">MERCHANTS</span>
               <span class="im-t">Paid in local currency, zero setup.</span>
               <span class="im-b">Through the QR they already have. Nothing to install.</span>
               <div class="im-hi" id="im-hi2"></div>
             </div>
             <div class="im-card" id="im-c3">
+              <svg class="im-ico" id="im-i3" viewBox="0 0 64 64" fill="none" stroke="#0a5cf5" stroke-width="3.5" stroke-linejoin="round"><path d="M8 26L32 12l24 14z"/><path d="M14 30v18M26 30v18M38 30v18M50 30v18M6 52h52"/></svg>
               <span class="im-k">PROVIDERS</span>
               <span class="im-t">A steady, verified flow.</span>
               <span class="im-b">Local liquidity partners earn on every completed payment, settled safely through escrow.</span>
               <div class="im-hi" id="im-hi3"></div>
             </div>
             <div class="im-card im-sol" id="im-c4">
+              <svg class="im-ico" id="im-i4" viewBox="0 0 64 64" fill="none" stroke="#ffffff" stroke-width="3.5"><circle cx="14" cy="16" r="6"/><circle cx="50" cy="16" r="6"/><circle cx="32" cy="48" r="6"/><path d="M20 16h24M17 21l12 22M47 21L35 43"/></svg>
               <span class="im-k">SOLANA</span>
               <span class="im-t">Real-world USDC payments.</span>
               <span class="im-b">Fast, low-cost settlement turned into everyday payments at the counter.</span>
@@ -213,6 +224,7 @@
         beats.forEach((t, i) => {
           const n = i + 1;
           tl.fromTo(`#im-hi${n}`, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, t);
+          tl.fromTo(`#im-i${n}`, { scale: 0.4, rotation: -30 }, { scale: 1, rotation: 0, duration: 0.6, ease: "back.out(2.6)" }, t);
           tl.to(`#im-c${n}`, { y: -18, duration: 0.45, ease: "power2.out" }, t);
           const next = beats[i + 1];
           if (next) tl.to(`#im-c${n}`, { y: 0, duration: 0.45, ease: "power2.inOut" }, next);
