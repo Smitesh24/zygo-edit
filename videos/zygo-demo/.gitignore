@@ -1,0 +1,11 @@
+# Regenerable media (see scripts/): footage proxies and the synthesized music bed
+assets/footage/
+assets/audio/music.wav
+# Render / check outputs
+snapshots/
+renders/
+*.mp4
+!assets/**/*.keep
+.hyperframes/
+node_modules/
+__pycache__/

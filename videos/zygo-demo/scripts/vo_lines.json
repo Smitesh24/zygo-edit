@@ -1,0 +1,25 @@
+{
+  "voice": "af_heart",
+  "speed": 1.0,
+  "lines": [
+    { "id": "title-1", "text": "Meet Zygo. Earn globally. Pay locally." },
+    { "id": "title-2", "text": "Spend USDC at any local QR code, and the merchant gets paid in local currency, in seconds." },
+    { "id": "problem-1", "text": "Because today, cashing out crypto is a gamble." },
+    { "id": "problem-2", "text": "You sell to a stranger on a P2P desk, and risk a frozen bank account. You lose up to thirty percent to tax, pay hidden forex spreads, and still wait on slow settlement." },
+    { "id": "solution-1", "text": "Zygo flips that. Don't cash out. Just pay." },
+    { "id": "solution-2", "text": "Scan any local QR, see the full USDC cost upfront, lock it in escrow, and a verified provider pays the merchant directly." },
+    { "id": "demo-intro", "text": "Here's a live payment, from scan to settlement. The customer is on the left. A liquidity provider is on the right." },
+    { "id": "demo-scan", "text": "The customer scans the cafe's existing UPI QR code, and enters ten rupees." },
+    { "id": "demo-quote", "text": "Zygo quotes the full cost upfront. Zero point zero nine six USDC. No hidden spread." },
+    { "id": "demo-escrow", "text": "One approval in the wallet, and the USDC is held in Solana escrow, until the payout is verified." },
+    { "id": "demo-accept", "text": "The order is routed to a verified liquidity provider, who accepts it." },
+    { "id": "demo-payout", "text": "The provider pays the merchant ten rupees through UPI, and marks it paid, with the receipt as proof." },
+    { "id": "demo-confirm", "text": "The customer sees the proof, and confirms the merchant was paid, with a signed message." },
+    { "id": "demo-settle", "text": "Escrow releases. The provider receives the USDC in their wallet, and the payment is settled on-chain." },
+    { "id": "impact-1", "text": "Crypto becomes spendable in daily life." },
+    { "id": "impact-2", "text": "Earners keep dollars, and spend local. Merchants get paid in local currency, with zero setup. Providers earn on a verified flow. And Solana gets real-world USDC payments." },
+    { "id": "traction-1", "text": "And it's already live. A hundred and fifty beta users. A hundred and twenty thousand dollars processed in four weeks, across US to India and UAE to India corridors, with ten liquidity providers onboarded." },
+    { "id": "traction-2", "text": "Next, we scale through our Payout API, and our QR Payments API." },
+    { "id": "outro", "text": "Zygo. Earn globally. Pay locally." }
+  ]
+}

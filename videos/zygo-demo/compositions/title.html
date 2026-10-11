@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin-ext.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C4, U+2113;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        [data-composition-id="title"] .ti-bg {
+          position: absolute;
+          inset: 0;
+          background-color: #f3f2f2;
+          background-image:
+            linear-gradient(rgba(32, 30, 29, 0.05) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(32, 30, 29, 0.05) 2px, transparent 2px);
+          background-size: 96px 96px;
+          background-position: -2px -2px;
+        }
+        [data-composition-id="title"] .ti-col {
+          position: absolute;
+          left: 96px;
+          top: 0;
+          width: 884px;
+          height: 100%;
+          font-family: "Archivo", sans-serif;
+          color: #201e1d;
+        }
+        [data-composition-id="title"] .ti-logo {
+          position: absolute;
+          left: 0;
+          top: 80px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          font-size: 34px;
+          font-weight: 800;
+          letter-spacing: -0.01em;
+        }
+        [data-composition-id="title"] .ti-logo-mark {
+          display: block;
+          width: 34px;
+          height: 34px;
+          background: #0a5cf5;
+        }
+        [data-composition-id="title"] .ti-rule {
+          position: absolute;
+          left: 0;
+          top: 352px;
+          width: 884px;
+          height: 3px;
+          background: #201e1d;
+          transform-origin: 0 50%;
+        }
+        [data-composition-id="title"] .ti-head {
+          position: absolute;
+          left: 0;
+          top: 392px;
+          width: 884px;
+          font-size: 128px;
+          font-weight: 800;
+          line-height: 1.02;
+          letter-spacing: -0.035em;
+        }
+        [data-composition-id="title"] .ti-line {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 8px;
+        }
+        [data-composition-id="title"] .ti-line span {
+          display: block;
+        }
+        [data-composition-id="title"] .ti-blue {
+          color: #0a5cf5;
+        }
+        [data-composition-id="title"] .ti-sub {
+          position: absolute;
+          left: 0;
+          top: 700px;
+          width: 760px;
+          font-size: 36px;
+          line-height: 1.35;
+          font-weight: 400;
+          color: #3d3a38;
+        }
+        [data-composition-id="title"] .ti-foot {
+          position: absolute;
+          left: 0;
+          top: 914px;
+          width: 884px;
+          display: flex;
+          gap: 140px;
+          border-top: 2px solid rgba(32, 30, 29, 0.25);
+          padding-top: 26px;
+          font-size: 22px;
+          font-weight: 700;
+          letter-spacing: 0.22em;
+          line-height: 1.45;
+          color: #201e1d;
+        }
+        [data-composition-id="title"] .ti-foot b {
+          display: block;
+          color: #0a5cf5;
+          font-weight: 700;
+        }
+        [data-composition-id="title"] .ti-hero {
+          position: absolute;
+          left: 1040px;
+          top: 0;
+          width: 880px;
+          height: 1080px;
+          overflow: hidden;
+          background: #0a2a8f;
+        }
+        [data-composition-id="title"] .ti-hero-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: 40% 50%;
+        }
+      </style>
+
+      <div id="root" data-composition-id="title" data-width="1920" data-height="1080">
+        <div class="ti-bg"></div>
+        <div class="ti-hero" id="ti-hero">
+          <img class="ti-hero-img" id="ti-hero-img" src="assets/brand/hero_z.png" alt="" />
+        </div>
+        <div class="ti-col">
+          <div class="ti-logo" id="ti-logo"><span class="ti-logo-mark"></span>zygo.cash</div>
+          <div class="ti-rule" id="ti-rule"></div>
+          <div class="ti-head">
+            <span class="ti-line"><span id="ti-l1">Earn globally.</span></span>
+            <span class="ti-line"><span id="ti-l2" class="ti-blue">Pay locally.</span></span>
+          </div>
+          <div class="ti-sub" id="ti-sub">
+            Spend USDC at any local QR code. The merchant gets paid in local currency, in seconds.
+          </div>
+          <div class="ti-foot" id="ti-foot">
+            <div>COLOSSEUM<b>HACKATHON</b></div>
+            <div>BUILT ON<b>SOLANA</b></div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        // Hero panel wipes in from the right, then a slow push for the whole scene
+        tl.fromTo("#ti-hero", { clipPath: "inset(0% 0% 0% 100%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "power4.inOut" }, 0.1);
+        tl.fromTo("#ti-hero-img", { scale: 1.18, xPercent: 4 }, { scale: 1.0, xPercent: 0, duration: 11.8, ease: "power1.out" }, 0.1);
+        // VO title-1 lands at 1.2s: "Meet Zygo." 1.25 / "Earn globally." 2.1 / "Pay locally." 2.95
+        tl.fromTo("#ti-logo", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 1.05);
+        tl.fromTo("#ti-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" }, 1.3);
+        tl.fromTo("#ti-l1", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: "power4.out" }, 2.0);
+        tl.fromTo("#ti-l2", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: "power4.out" }, 2.85);
+        // VO title-2 at 4.5s
+        tl.fromTo("#ti-sub", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 4.45);
+        tl.fromTo("#ti-foot", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 5.4);
+        // Exit just before the wipe covers the cut at 12.0
+        tl.to(".ti-col", { x: -60, opacity: 0, duration: 0.5, ease: "power2.in" }, 11.35);
+        window.__timelines["title"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
