@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin-ext.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C4, U+2113;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        [data-composition-id="problem"] .pr-bg {
+          position: absolute;
+          inset: 0;
+          background-color: #f3f2f2;
+          background-image:
+            linear-gradient(rgba(32, 30, 29, 0.05) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(32, 30, 29, 0.05) 2px, transparent 2px);
+          background-size: 96px 96px;
+          background-position: -2px -2px;
+        }
+        [data-composition-id="problem"] .pr-ghost {
+          position: absolute;
+          right: -40px;
+          bottom: -90px;
+          font-family: "Archivo", sans-serif;
+          font-size: 420px;
+          font-weight: 900;
+          letter-spacing: -0.05em;
+          color: rgba(10, 92, 245, 0.07);
+          line-height: 1;
+          white-space: nowrap;
+        }
+        [data-composition-id="problem"] .pr-wrap {
+          position: absolute;
+          inset: 0;
+          font-family: "Archivo", sans-serif;
+          color: #201e1d;
+        }
+        [data-composition-id="problem"] .pr-hdr {
+          position: absolute;
+          left: 96px;
+          right: 96px;
+          top: 62px;
+          display: flex;
+          justify-content: space-between;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.24em;
+          color: #5b5856;
+        }
+        [data-composition-id="problem"] .pr-hdr b {
+          color: #0a5cf5;
+        }
+        [data-composition-id="problem"] .pr-hrule {
+          position: absolute;
+          left: 96px;
+          top: 108px;
+          width: 1728px;
+          height: 2px;
+          background: #201e1d;
+          transform-origin: 0 50%;
+        }
+        [data-composition-id="problem"] .pr-head {
+          position: absolute;
+          left: 96px;
+          top: 176px;
+          width: 1728px;
+          font-size: 82px;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          line-height: 1.05;
+        }
+        [data-composition-id="problem"] .pr-head-line {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 6px;
+        }
+        [data-composition-id="problem"] .pr-head-line span {
+          display: block;
+        }
+        [data-composition-id="problem"] .pr-sub {
+          position: absolute;
+          left: 96px;
+          top: 300px;
+          width: 1240px;
+          font-size: 34px;
+          line-height: 1.4;
+          color: #3d3a38;
+        }
+        [data-composition-id="problem"] .pr-cols {
+          position: absolute;
+          left: 96px;
+          top: 470px;
+          width: 1728px;
+          height: 500px;
+          display: flex;
+        }
+        [data-composition-id="problem"] .pr-top {
+          position: absolute;
+          left: 96px;
+          top: 470px;
+          width: 1728px;
+          height: 3px;
+          background: #201e1d;
+          transform-origin: 0 50%;
+        }
+        [data-composition-id="problem"] .pr-col {
+          position: relative;
+          flex: 1 1 0;
+          height: 100%;
+          padding: 34px 26px 0 26px;
+          border-left: 2px solid rgba(32, 30, 29, 0.18);
+        }
+        [data-composition-id="problem"] .pr-col:first-child {
+          border-left: none;
+          padding-left: 0;
+        }
+        [data-composition-id="problem"] .pr-hi {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 100%;
+          background: #e4ecfd;
+          transform-origin: 50% 0;
+        }
+        [data-composition-id="problem"] .pr-col:first-child .pr-hi {
+          left: -26px;
+        }
+        [data-composition-id="problem"] .pr-inner {
+          position: relative;
+        }
+        [data-composition-id="problem"] .pr-num {
+          display: block;
+          font-size: 22px;
+          font-weight: 700;
+          color: #0a5cf5;
+          letter-spacing: 0.18em;
+          margin-bottom: 14px;
+        }
+        [data-composition-id="problem"] .pr-ttl {
+          display: block;
+          font-size: 36px;
+          font-weight: 800;
+          line-height: 1.12;
+          letter-spacing: -0.015em;
+          margin-bottom: 18px;
+        }
+        [data-composition-id="problem"] .pr-body {
+          display: block;
+          font-size: 25px;
+          line-height: 1.42;
+          color: #4a4644;
+        }
+      </style>
+
+      <div id="root" data-composition-id="problem" data-width="1920" data-height="1080">
+        <div class="pr-bg"></div>
+        <div class="pr-wrap" id="pr-wrap">
+          <div class="pr-hdr" id="pr-hdr"><span><b>02</b> — THE PROBLEM</span><span>ZYGO.CASH</span></div>
+          <div class="pr-hrule" id="pr-hrule"></div>
+          <div class="pr-head">
+            <span class="pr-head-line"><span id="pr-h1">Cashing out crypto today is a gamble.</span></span>
+          </div>
+          <div class="pr-sub" id="pr-sub">
+            Most people sell to a stranger on a P2P desk and wait for a bank transfer. Every step costs them.
+          </div>
+          <div class="pr-top" id="pr-top"></div>
+          <div class="pr-cols">
+            <div class="pr-col" id="pr-c1">
+              <div class="pr-hi" id="pr-hi1"></div>
+              <div class="pr-inner">
+                <span class="pr-num">P2P DESKS</span>
+                <span class="pr-ttl">Sell to a stranger.</span>
+                <span class="pr-body">Most cash-outs still run through unknown P2P counterparties.</span>
+              </div>
+            </div>
+            <div class="pr-col" id="pr-c2">
+              <div class="pr-hi" id="pr-hi2"></div>
+              <div class="pr-inner">
+                <span class="pr-num">FROZEN ACCOUNTS</span>
+                <span class="pr-ttl">One bad buyer can lock your bank account.</span>
+                <span class="pr-body">Flagged P2P deposits get the receiver's account frozen.</span>
+              </div>
+            </div>
+            <div class="pr-col" id="pr-c3">
+              <div class="pr-hi" id="pr-hi3"></div>
+              <div class="pr-inner">
+                <span class="pr-num">HEAVY TAX</span>
+                <span class="pr-ttl">Up to 30% in India, plus 1% TDS.</span>
+                <span class="pr-body">Every sell-and-withdraw cycle is a taxable event.</span>
+              </div>
+            </div>
+            <div class="pr-col" id="pr-c4">
+              <div class="pr-hi" id="pr-hi4"></div>
+              <div class="pr-inner">
+                <span class="pr-num">BAD FOREX</span>
+                <span class="pr-ttl">Hidden spreads on every conversion.</span>
+                <span class="pr-body">Desks price above market, and the true cost stays hidden.</span>
+              </div>
+            </div>
+            <div class="pr-col" id="pr-c5">
+              <div class="pr-hi" id="pr-hi5"></div>
+              <div class="pr-inner">
+                <span class="pr-num">SLOW SETTLEMENT</span>
+                <span class="pr-ttl">Sell, withdraw, wait, then spend.</span>
+                <span class="pr-body">Money sits in transit before it can be used.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#pr-hdr", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.15);
+        tl.fromTo("#pr-hrule", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" }, 0.2);
+        // problem-1 @0.3: "Because today, cashing out crypto is a gamble."
+        tl.fromTo("#pr-h1", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.45);
+        tl.fromTo("#pr-sub", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 1.6);
+        tl.fromTo("#pr-top", { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "expo.inOut" }, 2.4);
+        // problem-2 @3.4 — one pain per clause
+        const beats = [3.42, 6.22, 8.56, 10.73, 12.44];
+        beats.forEach((t, i) => {
+          const n = i + 1;
+          tl.fromTo(`#pr-c${n} .pr-inner`, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, t - 0.1);
+          tl.fromTo(`#pr-hi${n}`, { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: "power3.out" }, t - 0.1);
+          const next = beats[i + 1];
+          if (next) tl.to(`#pr-hi${n}`, { scaleY: 0, transformOrigin: "50% 100%", duration: 0.4, ease: "power2.in" }, next - 0.15);
+        });
+        tl.to("#pr-wrap", { x: -60, opacity: 0, duration: 0.45, ease: "power2.in" }, 13.85);
+        window.__timelines["problem"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

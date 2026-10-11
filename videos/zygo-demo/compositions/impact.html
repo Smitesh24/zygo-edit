@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin-ext.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C4, U+2113;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        [data-composition-id="impact"] .im-bg {
+          position: absolute;
+          inset: 0;
+          background-color: #f3f2f2;
+          background-image:
+            linear-gradient(rgba(32, 30, 29, 0.05) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(32, 30, 29, 0.05) 2px, transparent 2px);
+          background-size: 96px 96px;
+          background-position: -2px -2px;
+        }
+        [data-composition-id="impact"] .im-glow {
+          position: absolute;
+          width: 1400px;
+          height: 1400px;
+          left: -500px;
+          bottom: -900px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(10, 92, 245, 0.18) 0%, rgba(10, 92, 245, 0) 65%);
+        }
+        [data-composition-id="impact"] .im-wrap {
+          position: absolute;
+          inset: 0;
+          font-family: "Archivo", sans-serif;
+          color: #201e1d;
+        }
+        [data-composition-id="impact"] .im-hdr {
+          position: absolute;
+          left: 96px;
+          right: 96px;
+          top: 62px;
+          display: flex;
+          justify-content: space-between;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.24em;
+          color: #5b5856;
+        }
+        [data-composition-id="impact"] .im-hdr b {
+          color: #0a5cf5;
+        }
+        [data-composition-id="impact"] .im-hrule {
+          position: absolute;
+          left: 96px;
+          top: 108px;
+          width: 1728px;
+          height: 2px;
+          background: #201e1d;
+          transform-origin: 0 50%;
+        }
+        [data-composition-id="impact"] .im-head {
+          position: absolute;
+          left: 96px;
+          top: 176px;
+          width: 1728px;
+          font-size: 82px;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          line-height: 1.05;
+        }
+        [data-composition-id="impact"] .im-line {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 6px;
+        }
+        [data-composition-id="impact"] .im-line > span {
+          display: block;
+        }
+        [data-composition-id="impact"] .im-blue {
+          color: #0a5cf5;
+        }
+        [data-composition-id="impact"] .im-cards {
+          position: absolute;
+          left: 96px;
+          top: 420px;
+          width: 1728px;
+          height: 540px;
+          display: flex;
+          gap: 36px;
+        }
+        [data-composition-id="impact"] .im-card {
+          position: relative;
+          flex: 1 1 0;
+          height: 100%;
+          border: 3px solid #201e1d;
+          background: #ffffff;
+          padding: 40px 36px 0 36px;
+        }
+        [data-composition-id="impact"] .im-card.im-sol {
+          background: #0a5cf5;
+          border-color: #0a5cf5;
+          color: #ffffff;
+        }
+        [data-composition-id="impact"] .im-hi {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 10px;
+          background: #0a5cf5;
+          transform-origin: 0 50%;
+        }
+        [data-composition-id="impact"] .im-sol .im-hi {
+          background: #ffffff;
+        }
+        [data-composition-id="impact"] .im-k {
+          display: block;
+          font-size: 22px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          color: #0a5cf5;
+          margin-bottom: 30px;
+        }
+        [data-composition-id="impact"] .im-sol .im-k {
+          color: #ffffff;
+        }
+        [data-composition-id="impact"] .im-t {
+          display: block;
+          font-size: 44px;
+          font-weight: 800;
+          line-height: 1.08;
+          letter-spacing: -0.02em;
+          margin-bottom: 24px;
+        }
+        [data-composition-id="impact"] .im-b {
+          display: block;
+          font-size: 26px;
+          line-height: 1.42;
+          color: #4a4644;
+        }
+        [data-composition-id="impact"] .im-sol .im-b {
+          color: #ffffff;
+        }
+      </style>
+
+      <div id="root" data-composition-id="impact" data-width="1920" data-height="1080">
+        <div class="im-bg"></div>
+        <div class="im-glow" id="im-glow"></div>
+        <div class="im-wrap" id="im-wrap">
+          <div class="im-hdr" id="im-hdr"><span><b>05</b> — IMPACT</span><span>ZYGO.CASH</span></div>
+          <div class="im-hrule" id="im-hrule"></div>
+          <div class="im-head">
+            <span class="im-line"><span id="im-h1">Crypto becomes <span class="im-blue">spendable</span> in daily life.</span></span>
+          </div>
+          <div class="im-cards">
+            <div class="im-card" id="im-c1">
+              <span class="im-k">EARNERS</span>
+              <span class="im-t">Keep dollars, spend local.</span>
+              <span class="im-b">Freelancers and remote workers hold USDC and pay for daily life without a risky cash-out.</span>
+              <div class="im-hi" id="im-hi1"></div>
+            </div>
+            <div class="im-card" id="im-c2">
+              <span class="im-k">MERCHANTS</span>
+              <span class="im-t">Paid in local currency, zero setup.</span>
+              <span class="im-b">Through the QR they already have. Nothing to install.</span>
+              <div class="im-hi" id="im-hi2"></div>
+            </div>
+            <div class="im-card" id="im-c3">
+              <span class="im-k">PROVIDERS</span>
+              <span class="im-t">A steady, verified flow.</span>
+              <span class="im-b">Local liquidity partners earn on every completed payment, settled safely through escrow.</span>
+              <div class="im-hi" id="im-hi3"></div>
+            </div>
+            <div class="im-card im-sol" id="im-c4">
+              <span class="im-k">SOLANA</span>
+              <span class="im-t">Real-world USDC payments.</span>
+              <span class="im-b">Fast, low-cost settlement turned into everyday payments at the counter.</span>
+              <div class="im-hi" id="im-hi4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#im-glow", { x: -80, scale: 0.9 }, { x: 120, scale: 1.1, duration: 16.8, ease: "sine.inOut" }, 0);
+        tl.fromTo("#im-hdr", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+        tl.fromTo("#im-hrule", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" }, 0.15);
+        // impact-1 @0.3
+        tl.fromTo("#im-h1", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.35);
+        // impact-2 @3.1: earners 3.13 / merchants 5.77 / providers 9.65 / solana 12.13
+        const beats = [3.1, 5.74, 9.62, 12.1];
+        // all four cards rise together as the list starts, then each one lights up on its clause
+        [1, 2, 3, 4].forEach((n, i) => {
+          tl.fromTo(`#im-c${n}`, { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 2.3 + i * 0.12);
+        });
+        beats.forEach((t, i) => {
+          const n = i + 1;
+          tl.fromTo(`#im-hi${n}`, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, t);
+          tl.to(`#im-c${n}`, { y: -18, duration: 0.45, ease: "power2.out" }, t);
+          const next = beats[i + 1];
+          if (next) tl.to(`#im-c${n}`, { y: 0, duration: 0.45, ease: "power2.inOut" }, next);
+        });
+        tl.to("#im-wrap", { x: -60, opacity: 0, duration: 0.45, ease: "power2.in" }, 16.25);
+        window.__timelines["impact"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

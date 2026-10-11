@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin-ext.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C4, U+2113;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/JetBrainsMono-latin.woff2") format("woff2");
+          font-weight: 100 800;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        [data-composition-id="demo"] {
+          font-family: "Archivo", sans-serif;
+          color: #201e1d;
+        }
+        [data-composition-id="demo"] .dm-bg {
+          position: absolute;
+          inset: 0;
+          background-color: #f3f2f2;
+          background-image:
+            linear-gradient(rgba(32, 30, 29, 0.05) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(32, 30, 29, 0.05) 2px, transparent 2px);
+          background-size: 96px 96px;
+          background-position: -2px -2px;
+        }
+        [data-composition-id="demo"] .dm-glow {
+          position: absolute;
+          width: 1400px;
+          height: 1400px;
+          left: 560px;
+          top: -200px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(10, 92, 245, 0.16) 0%, rgba(10, 92, 245, 0) 62%);
+        }
+        [data-composition-id="demo"] .dm-ui {
+          position: absolute;
+          inset: 0;
+          font-family: "Archivo", sans-serif;
+          color: #201e1d;
+        }
+        [data-composition-id="demo"] .dm-hdr {
+          position: absolute;
+          left: 96px;
+          right: 96px;
+          top: 62px;
+          display: flex;
+          justify-content: space-between;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.24em;
+          color: #5b5856;
+        }
+        [data-composition-id="demo"] .dm-hdr b {
+          color: #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-hrule {
+          position: absolute;
+          left: 96px;
+          top: 108px;
+          width: 1728px;
+          height: 2px;
+          background: #201e1d;
+          transform-origin: 0 50%;
+        }
+        [data-composition-id="demo"] .dm-head {
+          position: absolute;
+          left: 96px;
+          top: 146px;
+          width: 540px;
+          font-size: 46px;
+          font-weight: 800;
+          letter-spacing: -0.025em;
+          line-height: 1.08;
+        }
+        [data-composition-id="demo"] .dm-hl {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 4px;
+        }
+        [data-composition-id="demo"] .dm-hl span {
+          display: block;
+        }
+        [data-composition-id="demo"] .dm-blue {
+          color: #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-stephi {
+          position: absolute;
+          left: 84px;
+          top: 290px;
+          width: 548px;
+          height: 98px;
+          background: #e4ecfd;
+          opacity: 0;
+        }
+        [data-composition-id="demo"] .dm-steps {
+          position: absolute;
+          left: 96px;
+          top: 290px;
+          width: 524px;
+        }
+        [data-composition-id="demo"] .dm-row {
+          position: relative;
+          height: 98px;
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          border-top: 2px solid rgba(32, 30, 29, 0.18);
+          padding-right: 46px;
+        }
+        [data-composition-id="demo"] .dm-rlab {
+          flex: 0 0 92px;
+          font-size: 17px;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          color: #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-rtxt {
+          font-size: 22px;
+          line-height: 1.3;
+          font-weight: 500;
+        }
+        [data-composition-id="demo"] .dm-chk {
+          position: absolute;
+          right: 4px;
+          top: 33px;
+          width: 32px;
+          height: 32px;
+          opacity: 0;
+        }
+        [data-composition-id="demo"] .dm-order {
+          position: absolute;
+          left: 96px;
+          top: 806px;
+          width: 524px;
+          height: 220px;
+          background: #ffffff;
+          border: 2px solid #201e1d;
+          padding: 20px 24px 0 24px;
+        }
+        [data-composition-id="demo"] .dm-o1 {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          font-size: 16px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          color: #5b5856;
+        }
+        [data-composition-id="demo"] .dm-mono {
+          font-family: "JetBrains Mono", monospace;
+          letter-spacing: 0;
+          font-size: 19px;
+          font-weight: 500;
+          color: #201e1d;
+        }
+        [data-composition-id="demo"] .dm-o2 {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          margin-top: 14px;
+          font-size: 38px;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+        }
+        [data-composition-id="demo"] .dm-oarrow {
+          display: block;
+          width: 34px;
+          height: 24px;
+        }
+        [data-composition-id="demo"] .dm-o3 {
+          margin-top: 8px;
+          font-size: 20px;
+          color: #5b5856;
+        }
+        [data-composition-id="demo"] .dm-o4 {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-top: 14px;
+        }
+        [data-composition-id="demo"] .dm-pulse {
+          display: block;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-statewin {
+          position: relative;
+          height: 36px;
+          width: 420px;
+          overflow: hidden;
+        }
+        [data-composition-id="demo"] .dm-states {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 420px;
+        }
+        [data-composition-id="demo"] .dm-state {
+          display: block;
+          height: 36px;
+          line-height: 36px;
+          font-family: "JetBrains Mono", monospace;
+          font-size: 24px;
+          font-weight: 700;
+          color: #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-panel {
+          position: absolute;
+          width: {{PW}}px;
+          height: {{PH}}px;
+          border-radius: 26px;
+          overflow: hidden;
+          background: #ffffff;
+          box-shadow: 0 0 0 2px rgba(32, 30, 29, 0.14), 0 30px 70px rgba(4, 20, 60, 0.16);
+        }
+        [data-composition-id="demo"] .dm-cam {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: {{PW}}px;
+          height: {{PH}}px;
+          transform-origin: 0 0;
+        }
+        [data-composition-id="demo"] .dm-vid {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        [data-composition-id="demo"] .dm-dim {
+          position: absolute;
+          inset: 0;
+          background: #f3f2f2;
+          opacity: 0;
+        }
+        [data-composition-id="demo"] .dm-chipwrap {
+          position: absolute;
+          width: {{PW}}px;
+          display: flex;
+          justify-content: center;
+        }
+        [data-composition-id="demo"] .dm-chip {
+          display: block;
+          padding: 11px 22px;
+          border-radius: 999px;
+          font-size: 17px;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          color: #ffffff;
+          white-space: nowrap;
+          box-shadow: 0 10px 24px rgba(4, 20, 60, 0.22);
+          opacity: 0;
+        }
+        [data-composition-id="demo"] .dm-chip-u {
+          background: #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-chip-l {
+          background: #04143c;
+        }
+        [data-composition-id="demo"] .dm-callout {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 16px 26px;
+          border-radius: 999px;
+          font-size: 26px;
+          font-weight: 700;
+          color: #ffffff;
+          white-space: nowrap;
+          box-shadow: 0 16px 36px rgba(4, 20, 60, 0.28);
+          opacity: 0;
+        }
+        [data-composition-id="demo"] .dm-callout.dm-blue {
+          background: #0a5cf5;
+          color: #ffffff;
+        }
+        [data-composition-id="demo"] .dm-callout.dm-ink {
+          background: #201e1d;
+        }
+        [data-composition-id="demo"] .dm-dot {
+          display: block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #ffffff;
+        }
+        [data-composition-id="demo"] .dm-card {
+          position: absolute;
+          background: #ffffff;
+          border-radius: 24px;
+          box-shadow: 0 0 0 3px #0a5cf5, 0 26px 60px rgba(4, 20, 60, 0.3);
+          opacity: 0;
+        }
+        [data-composition-id="demo"] .dm-qr {
+          width: 381px;
+          height: 430px;
+          padding: 30px 0 0 0;
+          text-align: center;
+        }
+        [data-composition-id="demo"] .dm-qrbox {
+          position: relative;
+          width: 200px;
+          height: 200px;
+          margin: 0 auto 20px auto;
+        }
+        [data-composition-id="demo"] .dm-qrbox svg {
+          display: block;
+          width: 200px;
+          height: 200px;
+        }
+        [data-composition-id="demo"] .dm-scan {
+          position: absolute;
+          left: -14px;
+          top: 0;
+          width: 228px;
+          height: 5px;
+          background: #0a5cf5;
+          box-shadow: 0 0 18px 6px rgba(10, 92, 245, 0.45);
+        }
+        [data-composition-id="demo"] .dm-k {
+          display: block;
+          font-size: 16px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          color: #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-qrname {
+          display: block;
+          margin-top: 6px;
+          font-size: 31px;
+          font-weight: 800;
+        }
+        [data-composition-id="demo"] .dm-qrsub {
+          display: block;
+          margin-top: 4px;
+          font-size: 20px;
+          color: #5b5856;
+        }
+        [data-composition-id="demo"] .dm-req {
+          width: 457px;
+          padding: 20px 24px;
+          display: flex;
+          align-items: center;
+          gap: 18px;
+        }
+        [data-composition-id="demo"] .dm-bell {
+          display: block;
+          flex: 0 0 52px;
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background: #0a5cf5;
+        }
+        [data-composition-id="demo"] .dm-req-t {
+          display: block;
+          font-size: 24px;
+          font-weight: 800;
+        }
+        [data-composition-id="demo"] .dm-req-s {
+          display: block;
+          font-size: 20px;
+          color: #5b5856;
+          margin-top: 2px;
+        }
+        [data-composition-id="demo"] .dm-upi {
+          width: 457px;
+          padding: 24px 26px;
+          background: #04143c;
+          color: #ffffff;
+          box-shadow: 0 0 0 3px #6fa0ff, 0 26px 60px rgba(4, 20, 60, 0.35);
+        }
+        [data-composition-id="demo"] .dm-upi .dm-k {
+          color: #6fa0ff;
+        }
+        [data-composition-id="demo"] .dm-upi-t {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          margin-top: 10px;
+          font-size: 34px;
+          font-weight: 800;
+        }
+        [data-composition-id="demo"] .dm-upi-s {
+          display: block;
+          margin-top: 8px;
+          font-size: 20px;
+          color: #d3ddf7;
+        }
+        [data-composition-id="demo"] .dm-recap {
+          position: absolute;
+          left: 680px;
+          top: 914px;
+          width: 1104px;
+          height: 112px;
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          padding: 0 32px;
+          background: #201e1d;
+          color: #ffffff;
+          border-radius: 22px;
+          box-shadow: 0 26px 60px rgba(4, 20, 60, 0.35);
+          opacity: 0;
+        }
+        [data-composition-id="demo"] .dm-recap svg {
+          display: block;
+          flex: 0 0 56px;
+          width: 56px;
+          height: 56px;
+        }
+        [data-composition-id="demo"] .dm-recap-t {
+          display: block;
+          font-size: 32px;
+          font-weight: 800;
+        }
+        [data-composition-id="demo"] .dm-recap-s {
+          display: block;
+          margin-top: 4px;
+          font-size: 22px;
+          color: #d8d6d4;
+        }
+        [data-composition-id="demo"] .dm-wallet {
+          position: absolute;
+          inset: 0;
+          background: #0b0c10;
+          opacity: 0;
+          clip-path: {{CLIP_FROM}};
+        }
+        [data-composition-id="demo"] .dm-wcam {
+          position: absolute;
+          left: 0;
+          top: 147px;
+          width: 1920px;
+          height: 786px;
+          transform-origin: 50% 50%;
+        }
+        [data-composition-id="demo"] .dm-wvid {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 786px;
+        }
+        [data-composition-id="demo"] .dm-wlabel {
+          position: absolute;
+          left: 64px;
+          top: 44px;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 12px 24px;
+          border-radius: 999px;
+          background: #0a5cf5;
+          color: #ffffff;
+          font-family: "Archivo", sans-serif;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          opacity: 0;
+        }
+      </style>
+
+      <div id="root" data-composition-id="demo" data-width="1920" data-height="1080">
+        <div class="dm-bg"></div>
+        <div class="dm-glow" id="dm-glow"></div>
+        <div class="dm-ui" id="dm-uiw">
+          <div class="dm-hdr" id="dm-hdr"><span><b>04</b> — LIVE DEMO</span><span>ZYGO.CASH</span></div>
+          <div class="dm-hrule" id="dm-hrule"></div>
+          <div class="dm-head">
+            <span class="dm-hl"><span id="dm-h1">A merchant payment,</span></span>
+            <span class="dm-hl"><span id="dm-h2" class="dm-blue">end to end.</span></span>
+          </div>
+          <div class="dm-stephi" id="dm-stephi"></div>
+          <div class="dm-steps" id="dm-steps">
+            {{ROWS}}
+          </div>
+          <div class="dm-order" id="dm-order">
+            <div class="dm-o1"><span>LIVE ORDER</span><span class="dm-mono">ord_00000179</span></div>
+            <div class="dm-o2">
+              <span>₹10.00</span>
+              <svg class="dm-oarrow" viewBox="0 0 34 24" fill="none" stroke="#201e1d" stroke-width="3.5"><path d="M2 12h28M20 3l10 9-10 9" /></svg>
+              <span class="dm-blue">0.0960 USDC</span>
+            </div>
+            <div class="dm-o3">GLOCAL Arena Cafe · UPI · India</div>
+            <div class="dm-o4">
+              <span class="dm-pulse" id="dm-pulse"></span>
+              <div class="dm-statewin"><div class="dm-states" id="dm-states" data-layout-allow-overflow>{{STATES}}</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dm-panel" id="dm-u" style="left: {{UX}}px; top: {{UY}}px">
+          <div class="dm-cam" id="dm-ucam">
+          {{VIDS_U}}
+          </div>
+          <div class="dm-dim" id="dm-udim"></div>
+        </div>
+        <div class="dm-panel" id="dm-l" style="left: {{LX}}px; top: {{LY}}px">
+          <div class="dm-cam" id="dm-lcam">
+          {{VIDS_L}}
+          </div>
+          <div class="dm-dim" id="dm-ldim"></div>
+        </div>
+        <div class="dm-chipwrap" style="left: {{UX}}px; top: 128px"><span class="dm-chip dm-chip-u" id="dm-uchip">CUSTOMER · PAYS IN USDC</span></div>
+        <div class="dm-chipwrap" style="left: {{LX}}px; top: 128px"><span class="dm-chip dm-chip-l" id="dm-lchip">LIQUIDITY PROVIDER · PAYS INR</span></div>
+
+        <div class="dm-card dm-qr" id="dm-qr" style="left: 748px; top: 300px">
+          <div class="dm-qrbox">
+            <svg viewBox="0 0 100 100">
+              <g fill="#201e1d">
+                <path d="M0 0h30v30H0zM6 6v18h18V6zM10 10h10v10H10z" fill-rule="evenodd" />
+                <path d="M70 0h30v30H70zM76 6v18h18V6zM80 10h10v10H80z" fill-rule="evenodd" />
+                <path d="M0 70h30v30H0zM6 76v18h18V76zM10 80h10v10H10z" fill-rule="evenodd" />
+                <path d="M38 4h8v8h-8zM50 0h6v14h-6zM38 18h14v8H38zM60 20h6v6h-6zM40 34h6v12h-6zM52 34h12v6H52zM70 38h8v8h-8zM84 36h12v6H84zM0 40h12v6H0zM18 38h10v8H18zM56 48h8v14h-8zM40 54h10v6H40zM72 52h6v14h-6zM84 50h16v8H84zM38 66h10v10H38zM60 70h8v6h-8zM80 66h6v6h-6zM90 72h10v10H90zM38 84h6v16h-6zM52 82h12v6H52zM70 82h10v8H70zM56 94h8v6h-8zM78 94h10v6H78z" />
+              </g>
+            </svg>
+            <div class="dm-scan" id="dm-scan"></div>
+          </div>
+          <span class="dm-k">MERCHANT QR · SCANNED</span>
+          <span class="dm-qrname">GLOCAL Arena Cafe</span>
+          <span class="dm-qrsub">UPI · India</span>
+        </div>
+
+        <div class="dm-card dm-req" id="dm-req" style="left: {{LX}}px; top: 196px">
+          <span class="dm-bell"></span>
+          <div><span class="dm-req-t">New payment request</span><span class="dm-req-s">ord_00000179 · ₹10 · offered to verified LPs</span></div>
+        </div>
+
+        <div class="dm-card dm-upi" id="dm-upi" style="left: {{LX}}px; top: 196px">
+          <span class="dm-k">PROVIDER → MERCHANT</span>
+          <span class="dm-upi-t">
+            <svg viewBox="0 0 32 32" width="38" height="38"><circle cx="16" cy="16" r="15" fill="#6fa0ff" /><path d="M9 16.5l4.5 4.5L23 11.5" fill="none" stroke="#04143c" stroke-width="3.2" /></svg>
+            ₹10 paid via UPI
+          </span>
+          <span class="dm-upi-s">Straight to the cafe's UPI QR, from the provider's own account.</span>
+        </div>
+
+        {{CALLOUTS}}
+
+        <div class="dm-recap" id="dm-recap">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="#0a5cf5" /><path d="M9 16.5l4.5 4.5L23 11.5" fill="none" stroke="#fff" stroke-width="3" /></svg>
+          <div>
+            <span class="dm-recap-t">Scan to settlement, live.</span>
+            <span class="dm-recap-s">Customer paid 0.0960 USDC · merchant received ₹10 via UPI · provider received USDC</span>
+          </div>
+        </div>
+
+        <div class="dm-wallet" id="dm-wallet">
+          <div class="dm-wcam" id="dm-wcam">
+          {{WALLET_VIDS}}
+          </div>
+          <div class="dm-wlabel" id="dm-wl1">WALLET · APPROVE 0.096 USDC INTO ESCROW</div>
+          <div class="dm-wlabel" id="dm-wl2">WALLET · SIGN "MERCHANT RECEIVED THIS PAYMENT"</div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#dm-glow", { x: -60, scale: 0.9 }, { x: 60, scale: 1.08, duration: 64.8, ease: "sine.inOut" }, 0);
+        // ---- intro: stage builds under "Here's a live payment, from scan to settlement..."
+        tl.fromTo("#dm-hdr", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.05);
+        tl.fromTo("#dm-hrule", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" }, 0.1);
+        tl.fromTo("#dm-h1", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: "power4.out" }, 0.3);
+        tl.fromTo("#dm-h2", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: "power4.out" }, 1.45);
+        tl.fromTo("#dm-u", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 0.35);
+        tl.fromTo("#dm-l", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 0.55);
+        tl.fromTo("#dm-steps .dm-row", { opacity: 0, x: -24 }, { opacity: 0.45, x: 0, duration: 0.5, stagger: 0.12, ease: "power2.out" }, 1.6);
+        tl.fromTo("#dm-uchip", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2.2)" }, 3.05);
+        tl.fromTo("#dm-lchip", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2.2)" }, 5.0);
+        tl.fromTo("#dm-order", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 13.85);
+        tl.fromTo("#dm-pulse", { scale: 0.7 }, { scale: 1.25, duration: 0.6, ease: "sine.inOut", repeat: 82, yoyo: true }, 14.0);
+        // ---- QR scanned card
+        tl.fromTo("#dm-qr", { opacity: 0, scale: 0.85, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }, 8.05);
+        tl.fromTo("#dm-scan", { y: 0 }, { y: 196, duration: 0.6, ease: "sine.inOut", repeat: 1, yoyo: true }, 8.3);
+        tl.to("#dm-qr", { opacity: 0, scale: 0.92, duration: 0.3, ease: "power2.in" }, 9.65);
+        // ---- wallet cut-aways (expand out of the customer panel)
+        tl.set("#dm-wallet", { opacity: 1 }, 21.2);
+        tl.fromTo("#dm-wallet", { clipPath: "{{CLIP_FROM}}" }, { clipPath: "{{CLIP_TO}}", duration: 0.45, ease: "power3.inOut", immediateRender: false }, 21.2);
+        tl.fromTo("#dm-wcam", { scale: 0.94 }, { scale: 1, duration: 1.2, ease: "power3.out" }, 21.2);
+        tl.fromTo("#dm-wl1", { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 21.55);
+        tl.to("#dm-wl1", { opacity: 0, duration: 0.25 }, 24.1);
+        tl.to("#dm-wallet", { clipPath: "{{CLIP_FROM}}", duration: 0.4, ease: "power3.inOut" }, 24.2);
+        tl.set("#dm-wallet", { opacity: 0 }, 24.6);
+        tl.set("#dm-uiw", { opacity: 0 }, 21.66);
+        tl.set("#dm-uiw", { opacity: 1 }, 24.2);
+        tl.set("#dm-wallet", { opacity: 1 }, 47.6);
+        tl.fromTo("#dm-wallet", { clipPath: "{{CLIP_FROM}}" }, { clipPath: "{{CLIP_TO}}", duration: 0.45, ease: "power3.inOut", immediateRender: false }, 47.6);
+        tl.fromTo("#dm-wcam", { scale: 0.94 }, { scale: 1, duration: 1.0, ease: "power3.out", immediateRender: false }, 47.6);
+        tl.fromTo("#dm-wl2", { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 47.85);
+        tl.to("#dm-wl2", { opacity: 0, duration: 0.2 }, 49.2);
+        tl.to("#dm-wallet", { clipPath: "{{CLIP_FROM}}", duration: 0.4, ease: "power3.inOut" }, 49.25);
+        tl.set("#dm-wallet", { opacity: 0 }, 49.65);
+        tl.set("#dm-uiw", { opacity: 0 }, 48.06);
+        tl.set("#dm-uiw", { opacity: 1 }, 49.25);
+        // ---- provider beats
+        tl.fromTo("#dm-req", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }, 26.05);
+        tl.to("#dm-req", { opacity: 0, y: -16, duration: 0.3, ease: "power2.in" }, 28.9);
+        tl.fromTo("#dm-upi", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }, 36.1);
+        tl.to("#dm-upi", { opacity: 0, y: -16, duration: 0.3, ease: "power2.in" }, 38.55);
+        // ---- recap
+        tl.fromTo("#dm-recap", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.55, ease: "back.out(1.6)" }, 62.55);
+        // ---- generated: camera, focus, steps, order state, callouts
+        {{GEN_JS}}
+        window.__timelines["demo"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+          font-family: "Archivo";
+          src: url("assets/fonts/Archivo-latin-ext.woff2") format("woff2");
+          font-weight: 100 900;
+          font-display: block;
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C4, U+2113;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        [data-composition-id="traction"] .tr-bg {
+          position: absolute;
+          inset: 0;
+          background-color: #04143c;
+          background-image:
+            linear-gradient(rgba(255, 255, 255, 0.045) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.045) 2px, transparent 2px);
+          background-size: 96px 96px;
+          background-position: -2px -2px;
+        }
+        [data-composition-id="traction"] .tr-glow {
+          position: absolute;
+          width: 1500px;
+          height: 1500px;
+          right: -600px;
+          top: -700px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(10, 92, 245, 0.45) 0%, rgba(10, 92, 245, 0) 62%);
+        }
+        [data-composition-id="traction"] .tr-wrap {
+          position: absolute;
+          inset: 0;
+          font-family: "Archivo", sans-serif;
+          color: #ffffff;
+        }
+        [data-composition-id="traction"] .tr-hdr {
+          position: absolute;
+          left: 96px;
+          right: 96px;
+          top: 62px;
+          display: flex;
+          justify-content: space-between;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.24em;
+          color: #6fa0ff;
+        }
+        [data-composition-id="traction"] .tr-hrule {
+          position: absolute;
+          left: 96px;
+          top: 108px;
+          width: 1728px;
+          height: 2px;
+          background: rgba(255, 255, 255, 0.4);
+          transform-origin: 0 50%;
+        }
+        [data-composition-id="traction"] .tr-head {
+          position: absolute;
+          left: 96px;
+          top: 158px;
+          width: 1728px;
+          font-size: 82px;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          line-height: 1.05;
+        }
+        [data-composition-id="traction"] .tr-line {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 6px;
+        }
+        [data-composition-id="traction"] .tr-line span {
+          display: block;
+        }
+        [data-composition-id="traction"] .tr-stats {
+          position: absolute;
+          left: 96px;
+          top: 300px;
+          width: 1728px;
+          height: 300px;
+          display: flex;
+          border-top: 2px solid rgba(255, 255, 255, 0.25);
+        }
+        [data-composition-id="traction"] .tr-stat {
+          flex: 1 1 0;
+          height: 100%;
+          padding: 26px 0 0 40px;
+          border-left: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        [data-composition-id="traction"] .tr-stat:first-child {
+          border-left: none;
+          padding-left: 0;
+        }
+        [data-composition-id="traction"] .tr-num {
+          display: block;
+          font-size: 168px;
+          font-weight: 800;
+          letter-spacing: -0.04em;
+          line-height: 1;
+          font-variant-numeric: tabular-nums;
+          transform-origin: 0 80%;
+        }
+        [data-composition-id="traction"] .tr-sky {
+          color: #6fa0ff;
+        }
+        [data-composition-id="traction"] .tr-lbl {
+          display: block;
+          margin-top: 18px;
+          font-size: 30px;
+          font-weight: 500;
+          color: #d3ddf7;
+        }
+        [data-composition-id="traction"] .tr-corr {
+          position: absolute;
+          left: 96px;
+          top: 628px;
+          display: flex;
+          align-items: center;
+          gap: 22px;
+        }
+        [data-composition-id="traction"] .tr-corr-k {
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.24em;
+          color: #6fa0ff;
+          margin-right: 10px;
+        }
+        [data-composition-id="traction"] .tr-chip {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 12px 28px;
+          border: 2px solid rgba(255, 255, 255, 0.45);
+          border-radius: 999px;
+          font-size: 30px;
+          font-weight: 700;
+          color: #ffffff;
+        }
+        [data-composition-id="traction"] .tr-arrow {
+          display: block;
+          width: 30px;
+          height: 22px;
+        }
+        [data-composition-id="traction"] .tr-scale-k {
+          position: absolute;
+          left: 96px;
+          top: 742px;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.24em;
+          color: #6fa0ff;
+        }
+        [data-composition-id="traction"] .tr-apis {
+          position: absolute;
+          left: 96px;
+          top: 784px;
+          width: 1728px;
+          height: 236px;
+          display: flex;
+          gap: 36px;
+        }
+        [data-composition-id="traction"] .tr-api {
+          flex: 1 1 0;
+          height: 100%;
+          padding: 28px 34px 0 34px;
+          background: rgba(111, 160, 255, 0.1);
+          border: 2px solid rgba(111, 160, 255, 0.6);
+        }
+        [data-composition-id="traction"] .tr-api-k {
+          display: block;
+          font-size: 22px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          color: #6fa0ff;
+          margin-bottom: 14px;
+        }
+        [data-composition-id="traction"] .tr-api-t {
+          display: block;
+          font-size: 34px;
+          font-weight: 800;
+          line-height: 1.15;
+          margin-bottom: 10px;
+        }
+        [data-composition-id="traction"] .tr-api-b {
+          display: block;
+          font-size: 25px;
+          line-height: 1.4;
+          color: #d3ddf7;
+        }
+      </style>
+
+      <div id="root" data-composition-id="traction" data-width="1920" data-height="1080">
+        <div class="tr-bg"></div>
+        <div class="tr-glow" id="tr-glow"></div>
+        <div class="tr-wrap" id="tr-wrap">
+          <div class="tr-hdr" id="tr-hdr"><span>06 — TRACTION</span><span>PRIVATE BETA · LIVE</span></div>
+          <div class="tr-hrule" id="tr-hrule"></div>
+          <div class="tr-head">
+            <span class="tr-line"><span id="tr-h1">Live beta, real volume.</span></span>
+          </div>
+          <div class="tr-stats" id="tr-stats">
+            <div class="tr-stat" id="tr-s1">
+              <span class="tr-num" id="tr-n1">0</span>
+              <span class="tr-lbl">Private beta users</span>
+            </div>
+            <div class="tr-stat" id="tr-s2">
+              <span class="tr-num tr-sky" id="tr-n2">$0K</span>
+              <span class="tr-lbl">Processed in the last 4 weeks</span>
+            </div>
+            <div class="tr-stat" id="tr-s3">
+              <span class="tr-num" id="tr-n3">0</span>
+              <span class="tr-lbl">Liquidity providers onboarded</span>
+            </div>
+          </div>
+          <div class="tr-corr" id="tr-corr">
+            <span class="tr-corr-k" id="tr-corr-k">LIVE CORRIDORS</span>
+            <span class="tr-chip" id="tr-chip1">US
+              <svg class="tr-arrow" viewBox="0 0 30 22" fill="none" stroke="#6fa0ff" stroke-width="3.5"><path d="M2 11h24M17 3l9 8-9 8" /></svg>
+              INR</span>
+            <span class="tr-chip" id="tr-chip2">UAE
+              <svg class="tr-arrow" viewBox="0 0 30 22" fill="none" stroke="#6fa0ff" stroke-width="3.5"><path d="M2 11h24M17 3l9 8-9 8" /></svg>
+              INR</span>
+          </div>
+          <div class="tr-scale-k" id="tr-scale-k">HOW WE SCALE · API-FIRST</div>
+          <div class="tr-apis">
+            <div class="tr-api" id="tr-a1">
+              <span class="tr-api-k">PAYOUT API</span>
+              <span class="tr-api-t">For card providers in remittance and employee payments.</span>
+              <span class="tr-api-b">Fund in USDC once, deliver local currency to families, staff and contractors.</span>
+            </div>
+            <div class="tr-api" id="tr-a2">
+              <span class="tr-api-k">QR PAYMENTS API</span>
+              <span class="tr-api-t">For crypto card companies.</span>
+              <span class="tr-api-b">Let cardholders scan and pay at UPI and other local QR networks, where cards aren't accepted.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#tr-glow", { scale: 0.9, x: 60 }, { scale: 1.15, x: -60, duration: 21.6, ease: "sine.inOut" }, 0);
+        tl.fromTo("#tr-hdr", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+        tl.fromTo("#tr-hrule", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" }, 0.15);
+        // traction-1 @0.4: "And it's already live." 0.43
+        tl.fromTo("#tr-h1", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.4);
+        tl.fromTo("#tr-stats", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, 1.2);
+
+        function counter(sel, target, at, fmt, dur) {
+          const el = document.querySelector(sel);
+          const state = { v: 0 };
+          tl.to(state, {
+            v: target,
+            duration: dur,
+            ease: "power3.out",
+            onUpdate: () => {
+              el.textContent = fmt(Math.round(state.v));
+            },
+          }, at);
+          tl.fromTo(sel, { scale: 0.72, opacity: 0 }, { scale: 1, opacity: 1, duration: dur, ease: "power3.out" }, at);
+        }
+        // "A hundred and fifty beta users" 1.85 / "$120K ... four weeks" 4.11 / "ten liquidity providers" 11.42
+        counter("#tr-n1", 150, 1.8, (v) => String(v), 1.3);
+        counter("#tr-n2", 120, 4.05, (v) => "$" + v + "K", 1.5);
+        counter("#tr-n3", 10, 11.38, (v) => String(v), 0.9);
+        // corridors 7.62
+        tl.fromTo("#tr-corr-k", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 7.5);
+        tl.fromTo("#tr-chip1", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 7.85);
+        tl.fromTo("#tr-chip2", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 8.9);
+        // traction-2 @14.2: "Payout API" 14.24 / "QR Payments API" 17.01
+        tl.fromTo("#tr-scale-k", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 13.9);
+        tl.fromTo("#tr-a1", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, 14.2);
+        tl.fromTo("#tr-a2", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, 16.95);
+        tl.to("#tr-wrap", { opacity: 0, y: -30, duration: 0.5, ease: "power2.in" }, 21.05);
+        window.__timelines["traction"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
